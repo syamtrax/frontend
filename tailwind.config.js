@@ -266,7 +266,7 @@ module.exports = {
         '"Segoe UI Emoji"',
         '"Segoe UI Symbol"',
         '"Noto Color Emoji"',
-        '"Inter',
+        '"Inter"',
       ],
       serif: [
         "ui-serif",

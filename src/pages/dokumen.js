@@ -16,7 +16,7 @@ const Document = () => {
 
   const refreshToken = async () => {
     try {
-      const response = await axios.get("https://sembapps.herokuapp.com/token");
+      const response = await axios.get("https://sembapp.azurewebsites.net/token");
       const decoded = jwt_decode(response.data.accessToken);
       setNama(decoded.namaPengguna);
     } catch (error) {
@@ -33,11 +33,11 @@ const Document = () => {
   }, []);
 
   const getDocument = async () => {
-    const response = await axios.get("https://sembapps.herokuapp.com/dokumen");
+    const response = await axios.get("https://sembapp.azurewebsites.net/dokumen");
     setDokumen(response.data);
   };
   const getTransaction = async () => {
-    const response = await axios.get("https://sembapps.herokuapp.com/transaction");
+    const response = await axios.get("https://sembapp.azurewebsites.net/transaction");
     setDataTrans(response.data);
     console.log(dataTrans);
     setDokumen((prevState) => [
@@ -55,7 +55,7 @@ const Document = () => {
 
   const deleteDocument = async (id) => {
     try {
-      await axios.delete(`https://sembapps.herokuapp.com/dokumen/${id}`);
+      await axios.delete(`https://sembapp.azurewebsites.net/dokumen/${id}`);
       getDocument();
     } catch (error) {
       console.log(error);

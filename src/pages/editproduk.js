@@ -37,7 +37,7 @@ function EditProduk() {
   const saveProduk = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(`https://sembapps.herokuapp.com/produk/${id}`, {
+      await axios.patch(`https://sembapp.azurewebsites.net/produk/${id}`, {
         kodeProduk,
         namaProduk,
         kategoriProduk,
@@ -61,7 +61,9 @@ function EditProduk() {
   }, []);
 
   const getProductById = async () => {
-    const response = await axios.get(`https://sembapps.herokuapp.com/produk/${id}}`);
+    const response = await axios.get(
+      `https://sembapp.azurewebsites.net/produk/${id}}`
+    );
     setkodeProduk(response.data.kodeProduk);
     setnamaProduk(response.data.namaProduk);
     setkategoriProduk(response.data.kategoriProduk);

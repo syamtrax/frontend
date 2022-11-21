@@ -17,7 +17,7 @@ function TambahDokumen() {
 
   const refreshToken = async () => {
     try {
-      const response = await axios.get("https://sembapps.herokuapp.com/token");
+      const response = await axios.get("https://sembapp.azurewebsites.net/token");
       const decoded = jwt_decode(response.data.accessToken);
       setNama(decoded.namaPengguna);
     } catch (error) {
@@ -30,7 +30,7 @@ function TambahDokumen() {
   const saveDokumen = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://sembapps.herokuapp.com/dokumen", {
+      await axios.post("https://sembapp.azurewebsites.net/dokumen", {
         namaDokumen,
         kategoriDokumen,
         deskripsiDokumen,

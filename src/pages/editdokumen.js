@@ -19,7 +19,9 @@ function EditDokumen() {
 
   const refreshToken = async () => {
     try {
-      const response = await axios.get("https://sembapps.herokuapp.com/token");
+      const response = await axios.get(
+        "https://sembapp.azurewebsites.net/token"
+      );
       const decoded = jwt_decode(response.data.accessToken);
       setNama(decoded.namaPengguna);
     } catch (error) {
@@ -52,7 +54,9 @@ function EditDokumen() {
   }, []);
 
   const getDocumentById = async () => {
-    const response = await axios.get(`https://sembapps.herokuapp.com/dokumen/${id}}`);
+    const response = await axios.get(
+      `https://sembapps.herokuapp.com/dokumen/${id}}`
+    );
     setnamaDokumen(response.data.namaDokumen);
     setkategoriDokumen(response.data.kategoriDokumen);
     setdeskripsiDokumen(response.data.deskripsiDokumen);

@@ -54,7 +54,7 @@ const Login = () => {
   const Authentication = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://sembapps.herokuapp.com/login", {
+      await axios.post("https://sembapp.azurewebsites.net/login", {
         user,
         pwd,
       });
@@ -62,6 +62,7 @@ const Login = () => {
     } catch (error) {
       if (error.response) {
         setErrMsg(error.response.data.msg);
+        console.log("hehe");
       }
     }
   };
@@ -83,9 +84,7 @@ const Login = () => {
             className="absolute w-full h-full object-cover"
           />
           <div className="w-1/4 p-6 m-auto bg-white rounded-md shadow-md z-10">
-            <h1 className="text-4xl font-bold text-center">
-              SembApp
-            </h1>
+            <h1 className="text-4xl font-bold text-center">SembApp</h1>
             <form onSubmit={Authentication} className="mt-6">
               <div className="mb-2">
                 <div className="flex justify-between">

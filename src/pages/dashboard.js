@@ -19,14 +19,18 @@ const Dashboard = () => {
 
   const refreshToken = async () => {
     try {
-      const response = await axios.get("https://sembapps.herokuapp.com/token");
+      const response = await axios.get(
+        "https://sembapp.azurewebsites.net/token"
+      );
       setToken(response.data.accessToken);
+      console.log("token" + response.data.accessToken);
       const decoded = jwt_decode(response.data.accessToken);
       setNama(decoded.namaPengguna);
       setNamaToko(decoded.namaToko);
       setExpire(decoded.exp);
     } catch (error) {
       if (error.response) {
+        console.log(error.response);
         navigate("/");
       }
     }
@@ -61,7 +65,7 @@ const Dashboard = () => {
       const currentDate = new Date();
       if (expire * 1000 < currentDate.getTime()) {
         const response = await axios.get(
-          "https://sembapps.herokuapp.com/token"
+          "https://sembapp.azurewebsites.net/token"
         );
         config.headers.Authorization = `Bearer ${response.data.accessToken}`;
         setToken(response.data.accessToken);
@@ -77,11 +81,14 @@ const Dashboard = () => {
   );
 
   const getUsers = async () => {
-    const response = await axiosJWT.get("https://sembapps.herokuapp.com/user", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await axiosJWT.get(
+      "https://sembapp.azurewebsites.net/user",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     console.log(response.data);
   };
 
@@ -92,7 +99,7 @@ const Dashboard = () => {
 
   const getTransaction = async () => {
     const response = await axios.get(
-      "https://sembapps.herokuapp.com/transaction"
+      "https://sembapp.azurewebsites.net/transaction"
     );
     //const date = new Date(response.data.createdAt);
     //response.data.createdAt = date.toISOString().substring(0, 10);
