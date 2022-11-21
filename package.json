@@ -12,6 +12,7 @@
     "bulma": "^0.9.4",
     "date-and-time": "^2.4.1",
     "jwt-decode": "^3.1.2",
+    "latest-version": "^7.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.6.0",
