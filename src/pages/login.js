@@ -63,7 +63,7 @@ const Login = () => {
           pwd,
         }
       );
-      console.log(JSON.stringify(response.data.accessToken));
+      console.log(response.data);
       const accessToken = response.data.accessToken;
       setCookie(JSON.stringify(accessToken), {
         path: "/",
