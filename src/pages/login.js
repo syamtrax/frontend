@@ -66,6 +66,7 @@ const Login = () => {
       console.log(JSON.stringify(response.data.accessToken));
       const accessToken = response.data.accessToken;
       setCookie("refreshToken", {accessToken});
+      console.log(cookies);
       navigate("/dashboard");
     } catch (error) {
       if (error.response) {
