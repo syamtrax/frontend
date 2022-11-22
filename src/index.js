@@ -6,15 +6,15 @@ import { CookiesProvider } from "react-cookie";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 axios.defaults.withCredentials = true;
 
-
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter>
-    <CookiesProvider>
-      <Routes>
-        <Route path = "/*" element={<App />} />
-      </Routes>
-    </CookiesProvider>
-  </BrowserRouter>
+  <React.StrictMode>
+    <BrowserRouter>
+      <CookiesProvider>
+        <Routes>
+          <Route path="/*" element={<App />}/>
+        </Routes>
+      </CookiesProvider>
+    </BrowserRouter>
+  </React.StrictMode>
 );
