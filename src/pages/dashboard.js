@@ -20,7 +20,7 @@ const Dashboard = () => {
   const refreshToken = async () => {
     try {
       const response = await axios.get(
-        "https://sembapp.azurewebsites.net/token"
+        "https://sembapp.azurewebsites.net/login"
       );
       setToken(response.data.accessToken);
       const decoded = jwt_decode(response.data.accessToken);
