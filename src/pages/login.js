@@ -2,13 +2,13 @@ import { useState, useRef } from "react";
 import axios from "axios";
 import loginBackground from "../assets/backgroundLogin.jpg";
 import { Link, useNavigate } from "react-router-dom";
-import useCookie from 'react-use-cookie';
+import useCookie from "react-use-cookie";
 
 const Login = () => {
   const useCookies = useCookie();
   const userRef = useRef();
   const errRef = useRef();
-  const [cookies, setCookie] = useCookies(["auth"]);
+  const [cookies, setCookie] = useCookies([]);
 
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
@@ -57,18 +57,21 @@ const Login = () => {
   const Authentication = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://sembapp.azurewebsites.net/login", {
-        user,
-        pwd,
-      }, 
-      {
-        headers : {
-          "Content-Type" : "application"
-      }
-      });
+      const response = await axios.post(
+        "https://sembapp.azurewebsites.net/login",
+        {
+          user,
+          pwd,
+        },
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        }
+      );
       console.log(JSON.stringify(response.data));
       const accessToken = response.data.payload.accessToken;
-      setCookie("auth", {accessToken});
+      setCookie("refreshToken", { accessToken });
 
       navigate("/dashboard");
     } catch (error) {
@@ -95,9 +98,7 @@ const Login = () => {
             className="absolute w-full h-full object-cover"
           />
           <div className="w-1/4 p-6 m-auto bg-white rounded-md shadow-md z-10">
-            <h1 className="text-4xl font-bold text-center">
-              SembApp
-            </h1>
+            <h1 className="text-4xl font-bold text-center">SembApp</h1>
             <form onSubmit={Authentication} className="mt-6">
               <div className="mb-2">
                 <div className="flex justify-between">
