@@ -19,7 +19,9 @@ const Dashboard = () => {
 
   const refreshToken = async () => {
     try {
-      const response = await axios.get("https://sembappcoba.azurewebsites.net/");
+      const response = await axios.get(
+        "https://sembappcoba.azurewebsites.net/token"
+      );
       setToken(response.data.accessToken);
       const decoded = jwt_decode(response.data.accessToken);
       setNama(decoded.namaPengguna);
@@ -77,11 +79,14 @@ const Dashboard = () => {
   );
 
   const getUsers = async () => {
-    const response = await axiosJWT.get("https://sembappcoba.azurewebsites.net/user", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await axiosJWT.get(
+      "https://sembappcoba.azurewebsites.net/user",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     console.log(response.data);
   };
 
