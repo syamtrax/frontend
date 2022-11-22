@@ -63,9 +63,9 @@ const Login = () => {
           pwd,
         }
       );
-      console.log(response);
-      const accessToken = response.data.accessToken;
-      setCookie(JSON.stringify(accessToken), {
+      console.log(response.data);
+      const accessToken = response.data.refreshToken;
+      setCookie(accessToken, {
         path: "/",
       });
       navigate("/dashboard");
