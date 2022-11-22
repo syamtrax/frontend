@@ -7,7 +7,7 @@ import useCookies from "react-use-cookie";
 const Login = () => {
   const userRef = useRef();
   const errRef = useRef();
-  const [cookies, setCookie] = useCookies(["auth"]);
+  const [cookies, setCookie] = useCookies(["refreshToken"]);
 
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
