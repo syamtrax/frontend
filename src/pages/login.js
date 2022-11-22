@@ -7,7 +7,7 @@ import useCookies from "react-use-cookie";
 const Login = () => {
   const userRef = useRef();
   const errRef = useRef();
-  const [cookies, setCookie] = useCookies(["refreshToken"]);
+  const [cookies, setCookie] = useCookies(["auth"]);
 
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
@@ -65,7 +65,7 @@ const Login = () => {
       );
       console.log(JSON.stringify(response.data.accessToken));
       const accessToken = response.data.accessToken;
-      setCookie("refreshToken", accessToken, {
+      setCookie("auth", {accessToken}, {
         path: "/",
       });
       navigate("/dashboard");
