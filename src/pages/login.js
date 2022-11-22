@@ -61,11 +61,6 @@ const Login = () => {
         {
           user,
           pwd,
-        },
-        {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
         }
       );
       console.log(JSON.stringify(response.data));
