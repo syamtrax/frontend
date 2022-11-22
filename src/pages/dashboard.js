@@ -8,6 +8,7 @@ import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 
+
 const Dashboard = () => {
   const [transaction, setTransaction] = useState([]);
   const [nama, setNama] = useState("");
@@ -17,10 +18,11 @@ const Dashboard = () => {
   //const [users, setUsers] = useState([]);
   const navigate = useNavigate();
 
+
   const refreshToken = async () => {
     try {
       const response = await axios.get(
-        "https://sembapp.azurewebsites.net/login"
+        "https://sembapp.azurewebsites.net/token"
       );
       setToken(response.data.accessToken);
       const decoded = jwt_decode(response.data.accessToken);
