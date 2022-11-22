@@ -15,7 +15,7 @@ const Product = () => {
 
   const refreshToken = async () => {
     try {
-      const response = await axios.get("https://sembappcoba.azurewebsites.net/token");
+      const response = await axios.get("https://sembapp.azurewebsites.net/token");
       const decoded = jwt_decode(response.data.accessToken);
       setNama(decoded.namaPengguna);
     } catch (error) {
@@ -31,13 +31,13 @@ const Product = () => {
   }, []);
 
   const getProduct = async () => {
-    const response = await axios.get("https://sembappcoba.azurewebsites.net/produk");
+    const response = await axios.get("https://sembapp.azurewebsites.net/produk");
     setProduk(response.data);
   };
 
   const deleteProduct = async (id) => {
     try {
-      await axios.delete(`https://sembappcoba.azurewebsites.net/produk/${id}`);
+      await axios.delete(`https://sembapp.azurewebsites.net/produk/${id}`);
       getProduct();
     } catch (error) {
       console.log(error);

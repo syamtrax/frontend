@@ -20,7 +20,7 @@ const Dashboard = () => {
   const refreshToken = async () => {
     try {
       const response = await axios.get(
-        "https://sembappcoba.azurewebsites.net/token"
+        "https://sembapp.azurewebsites.net/token"
       );
       setToken(response.data.accessToken);
       const decoded = jwt_decode(response.data.accessToken);
@@ -63,7 +63,7 @@ const Dashboard = () => {
       const currentDate = new Date();
       if (expire * 1000 < currentDate.getTime()) {
         const response = await axios.get(
-          "https://sembappcoba.azurewebsites.net/token"
+          "https://sembapp.azurewebsites.net/token"
         );
         config.headers.Authorization = `Bearer ${response.data.accessToken}`;
         setToken(response.data.accessToken);
@@ -80,7 +80,7 @@ const Dashboard = () => {
 
   const getUsers = async () => {
     const response = await axiosJWT.get(
-      "https://sembappcoba.azurewebsites.net/user",
+      "https://sembapp.azurewebsites.net/user",
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -97,7 +97,7 @@ const Dashboard = () => {
 
   const getTransaction = async () => {
     const response = await axios.get(
-      "https://sembappcoba.azurewebsites.net/transaction"
+      "https://sembapp.azurewebsites.net/transaction"
     );
     //const date = new Date(response.data.createdAt);
     //response.data.createdAt = date.toISOString().substring(0, 10);

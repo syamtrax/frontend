@@ -23,7 +23,7 @@ function TambahProduk() {
   const refreshToken = async () => {
     try {
       const response = await axios.get(
-        "https://sembappcoba.azurewebsites.net/token"
+        "https://sembapp.azurewebsites.net/token"
       );
       const decoded = jwt_decode(response.data.accessToken);
       setNama(decoded.namaPengguna);
@@ -37,7 +37,7 @@ function TambahProduk() {
   const saveProduk = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://sembappcoba.azurewebsites.net/produk", {
+      await axios.post("https://sembapp.azurewebsites.net/produk", {
         kodeProduk,
         namaProduk,
         kategoriProduk,
