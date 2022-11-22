@@ -2,13 +2,12 @@ import { useState, useRef } from "react";
 import axios from "axios";
 import loginBackground from "../assets/backgroundLogin.jpg";
 import { Link, useNavigate } from "react-router-dom";
-import useCookie from "react-use-cookie";
+import useCookies from "react-use-cookie";
 
 const Login = () => {
-  const useCookies = useCookie();
   const userRef = useRef();
   const errRef = useRef();
-  const [cookies, setCookie] = useCookies([]);
+  const [cookies, setCookie] = useCookies(["auth"]);
 
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
