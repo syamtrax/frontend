@@ -19,7 +19,7 @@ const Dashboard = () => {
 
   const refreshToken = async () => {
     try {
-      const response = await axios.get("https://sembapps.herokuapp.com/token");
+      const response = await axios.get("https://sembappcoba.azurewebsites.net/");
       setToken(response.data.accessToken);
       const decoded = jwt_decode(response.data.accessToken);
       setNama(decoded.namaPengguna);
@@ -61,7 +61,7 @@ const Dashboard = () => {
       const currentDate = new Date();
       if (expire * 1000 < currentDate.getTime()) {
         const response = await axios.get(
-          "https://sembapps.herokuapp.com/token"
+          "https://sembappcoba.azurewebsites.net/token"
         );
         config.headers.Authorization = `Bearer ${response.data.accessToken}`;
         setToken(response.data.accessToken);
@@ -77,7 +77,7 @@ const Dashboard = () => {
   );
 
   const getUsers = async () => {
-    const response = await axiosJWT.get("https://sembapps.herokuapp.com/user", {
+    const response = await axiosJWT.get("https://sembappcoba.azurewebsites.net/user", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -92,7 +92,7 @@ const Dashboard = () => {
 
   const getTransaction = async () => {
     const response = await axios.get(
-      "https://sembapps.herokuapp.com/transaction"
+      "https://sembappcoba.azurewebsites.net/transaction"
     );
     //const date = new Date(response.data.createdAt);
     //response.data.createdAt = date.toISOString().substring(0, 10);

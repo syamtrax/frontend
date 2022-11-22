@@ -15,7 +15,7 @@ const Product = () => {
 
   const refreshToken = async () => {
     try {
-      const response = await axios.get("https://sembapps.herokuapp.com/token");
+      const response = await axios.get("https://sembappcoba.azurewebsites.net/token");
       const decoded = jwt_decode(response.data.accessToken);
       setNama(decoded.namaPengguna);
     } catch (error) {
@@ -31,13 +31,13 @@ const Product = () => {
   }, []);
 
   const getProduct = async () => {
-    const response = await axios.get("https://sembapps.herokuapp.com/produk");
+    const response = await axios.get("https://sembappcoba.azurewebsites.net/produk");
     setProduk(response.data);
   };
 
   const deleteProduct = async (id) => {
     try {
-      await axios.delete(`https://sembapps.herokuapp.com/produk/${id}`);
+      await axios.delete(`https://sembappcoba.azurewebsites.net/produk/${id}`);
       getProduct();
     } catch (error) {
       console.log(error);

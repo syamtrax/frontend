@@ -54,7 +54,7 @@ const Login = () => {
   const Authentication = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://sembapps.herokuapp.com/login", {
+      await axios.post("https://sembappcoba.azurewebsites.net/login", {
         user,
         pwd,
       });

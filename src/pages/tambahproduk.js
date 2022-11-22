@@ -22,7 +22,9 @@ function TambahProduk() {
 
   const refreshToken = async () => {
     try {
-      const response = await axios.get("https://sembapps.herokuapp.com/token");
+      const response = await axios.get(
+        "https://sembappcoba.azurewebsites.net/token"
+      );
       const decoded = jwt_decode(response.data.accessToken);
       setNama(decoded.namaPengguna);
     } catch (error) {
@@ -33,9 +35,9 @@ function TambahProduk() {
   };
 
   const saveProduk = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     try {
-      await axios.post("https://sembapps.herokuapp.com/produk", {
+      await axios.post("https://sembappcoba.azurewebsites.net/produk", {
         kodeProduk,
         namaProduk,
         kategoriProduk,

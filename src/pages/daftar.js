@@ -16,7 +16,7 @@ function Daftar() {
   const saveUser = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://sembapps.herokuapp.com/user", {
+      await axios.post("https://sembappcoba.azurewebsites.net/user", {
         namaPengguna,
         sandi,
         telp,
