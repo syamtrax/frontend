@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import loginBackground from "../assets/backgroundLogin.jpg";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ const Login = () => {
   const userRef = useRef();
   const errRef = useRef();
   const [cookies, setCookie] = useCookies(["refreshToken"]);
+  const [token, setToken] = useState("")
 
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
@@ -52,6 +53,19 @@ const Login = () => {
     }
   }
   }*/
+  const Token = async (e) => {
+    try {
+      await axios.post("https://sembapp.azurewebsites.net/token", token)
+    } catch (error) {
+      if (error.response) {
+        setErrMsg(error.response.data.msg);
+      }
+    }
+  }
+  useEffect(() => {
+    Token();
+  }, []);
+  
 
   const Authentication = async (e) => {
     e.preventDefault();
@@ -63,8 +77,9 @@ const Login = () => {
           pwd,
         }
       );
-      console.log(response.data);
+      console.log(response.data.refreshToken);
       const accessToken = response.data.refreshToken;
+      setToken(accessToken);
       setCookie(accessToken, {
         path: "/",
       });
