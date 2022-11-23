@@ -6,24 +6,23 @@ import kasir from "../assets/Group.png";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 import { Redirect } from "react-router-dom";
-
 
 const Dashboard = () => {
   const [transaction, setTransaction] = useState([]);
+  const [cookies, setCookies] = useCookies(["accessToken"]);
   const [nama, setNama] = useState("");
   const [namaToko, setNamaToko] = useState("");
   const [token, setToken] = useState("");
   const [expire, setExpire] = useState("");
   //const [users, setUsers] = useState([]);
+
   const navigate = useNavigate();
 
-
-  const refreshToken = async () => {
+  /*const refreshToken = async () => {
     try {
-      const response = await axios.get(
-        "https://sembapp.azurewebsites.net/token"
-      );
+      const response = await axios.get("http://localhost:5000/token");
       setToken(response.data.accessToken);
       const decoded = jwt_decode(response.data.accessToken);
       setNama(decoded.namaPengguna);
@@ -31,6 +30,18 @@ const Dashboard = () => {
       setExpire(decoded.exp);
     } catch (error) {
       if (error.response) {
+        navigate("/");
+      }
+    }
+  };*/
+
+  const decode = async () => {
+    try {
+      const decoded = jwt_decode(cookies.accessToken);
+      setNama(decoded.namaPengguna);
+      setNamaToko(decoded.namaToko);
+    } catch (error) {
+      if (!cookies.accessToken) {
         navigate("/");
       }
     }
@@ -58,15 +69,13 @@ const Dashboard = () => {
     return count;
   }, 0);
 
-  const axiosJWT = axios.create();
+  /*const axiosJWT = axios.create();
 
   axiosJWT.interceptors.request.use(
     async (config) => {
       const currentDate = new Date();
       if (expire * 1000 < currentDate.getTime()) {
-        const response = await axios.get(
-          "https://sembapp.azurewebsites.net/token"
-        );
+        const response = await axios.get("http://localhost:5000/token");
         config.headers.Authorization = `Bearer ${response.data.accessToken}`;
         setToken(response.data.accessToken);
         const decoded = jwt_decode(response.data.accessToken);
@@ -81,30 +90,31 @@ const Dashboard = () => {
   );
 
   const getUsers = async () => {
-    const response = await axiosJWT.get(
-      "https://sembapp.azurewebsites.net/user",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const response = await axiosJWT.get("http://localhost:5000/user", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     console.log(response.data);
-  };
+  };*/
 
   useEffect(() => {
     getTransaction();
-    refreshToken();
+    //refreshToken();
+    decode();
   }, []);
 
   const getTransaction = async () => {
-    const response = await axios.get(
-      "https://sembapp.azurewebsites.net/transaction"
-    );
+    const response = await axios.get("http://localhost:5000/transaction", {
+      headers: {
+        authorization: `Bearer ${cookies.accessToken}`,
+      },
+    });
+    console.log(cookies.accessToken);
+
     //const date = new Date(response.data.createdAt);
     //response.data.createdAt = date.toISOString().substring(0, 10);
     setTransaction(response.data);
-    console.log(response);
   };
 
   return (
@@ -225,7 +235,9 @@ const Dashboard = () => {
                               </td>
                               <td className="w-32">{trans.member}</td>
                               <td className="w-32">
-                                <button onClick={getUsers}>Button</button>
+                                <button /*</td>onClick={getUsers}*/>
+                                  Button
+                                </button>
                               </td>
                             </tr>
                           );

@@ -3,19 +3,21 @@ import Navbar from "../components/navbar.js";
 import { BiChevronRight } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
 import { HiFilter } from "react-icons/hi";
+import { useCookies } from "react-cookie";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 
 const Product = () => {
   const [produk, setProduk] = useState([]);
+  const [cookies, setCookies] = useCookies(["accessToken"]);
 
   const [nama, setNama] = useState("");
   const navigate = useNavigate();
 
-  const refreshToken = async () => {
+  /*const refreshToken = async () => {
     try {
-      const response = await axios.get("https://sembapp.azurewebsites.net/token");
+      const response = await axios.get("http://localhost:5000/token");
       const decoded = jwt_decode(response.data.accessToken);
       setNama(decoded.namaPengguna);
     } catch (error) {
@@ -23,21 +25,33 @@ const Product = () => {
         navigate("/");
       }
     }
+  };*/
+  const decode = async () => {
+    try {
+      const decoded = jwt_decode(cookies.accessToken);
+      setNama(decoded.namaPengguna);
+      //setNamaToko(decoded.namaToko);
+    } catch (error) {
+      if (!cookies.accessToken) {
+        navigate("/");
+      }
+    }
   };
 
   useEffect(() => {
     getProduct();
-    refreshToken();
+    //refreshToken();
+    decode();
   }, []);
 
   const getProduct = async () => {
-    const response = await axios.get("https://sembapp.azurewebsites.net/produk");
+    const response = await axios.get("http://localhost:5000/produk");
     setProduk(response.data);
   };
 
   const deleteProduct = async (id) => {
     try {
-      await axios.delete(`https://sembapp.azurewebsites.net/produk/${id}`);
+      await axios.delete(`http://localhost:5000/produk/${id}`);
       getProduct();
     } catch (error) {
       console.log(error);
@@ -51,10 +65,9 @@ const Product = () => {
         </div>
         <div className="container py-16">
           <div className="content-center items-center">
-            <div className="pt-6 flex justify-content">
-              {" "}
-              Beranda
-              <span className="self-center">
+            <div className="pt-6 flex justify-start pb-3 text-xs">
+              <span className="text-gray-500">Beranda</span>
+              <span className="text-gray-500 self-center">
                 <BiChevronRight />
               </span>
               Produk

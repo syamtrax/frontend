@@ -5,12 +5,19 @@ import notifikasi from "../assets/notifikasi.png";
 import avatar from "../assets/avatardefault_92824.png";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 const Navbar = () => {
+  const [cookies, setCookies, removeCookie] = useCookies(["accessToken"]);
   const navigate = useNavigate();
   const Logout = async () => {
     try {
-      await axios.delete("https://sembapps.herokuapp.com/logout");
+      await axios.delete("http://localhost:5000/logout", {
+        headers: {
+          authorization: `Bearer ${cookies.accessToken}`,
+        },
+      });
+      removeCookie("accessToken", { path: "/" });
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -36,7 +43,7 @@ const Navbar = () => {
               <div className="px-5 bg-white hover:font-bold">Dokumen</div>
             </Link>
             <div className="px-5 bg-white hover:font-bold">Transaksi</div>
-            <div className="px-5 bg-white hover:font-bold">Keuangan</div> 
+            <div className="px-5 bg-white hover:font-bold">Keuangan</div>
           </div>
         </div>
         <div className="flex text-base text-center items-center gap-4">

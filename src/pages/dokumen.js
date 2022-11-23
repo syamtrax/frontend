@@ -6,6 +6,7 @@ import { HiFilter } from "react-icons/hi";
 import fotoprofil from "../assets/avatardefault_92824.png";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 import jwt_decode from "jwt-decode";
 
 const Document = () => {
@@ -13,10 +14,11 @@ const Document = () => {
   const [dataTrans, setDataTrans] = useState([]);
   const [nama, setNama] = useState("");
   const navigate = useNavigate();
+  const [cookies, setCookies] = useCookies(["accessToken"]);
 
-  const refreshToken = async () => {
+  /*const refreshToken = async () => {
     try {
-      const response = await axios.get("https://sembapp.azurewebsites.net/token");
+      const response = await axios.get("http://localhost:5000/token");
       const decoded = jwt_decode(response.data.accessToken);
       setNama(decoded.namaPengguna);
     } catch (error) {
@@ -24,20 +26,32 @@ const Document = () => {
         navigate("/");
       }
     }
+  };*/
+  const decode = async () => {
+    try {
+      const decoded = jwt_decode(cookies.accessToken);
+      setNama(decoded.namaPengguna);
+      //setNamaToko(decoded.namaToko);
+    } catch (error) {
+      if (!cookies.accessToken) {
+        navigate("/");
+      }
+    }
   };
 
   useEffect(() => {
     getDocument();
-    refreshToken();
+    //refreshToken();
+    decode();
     getTransaction();
   }, []);
 
   const getDocument = async () => {
-    const response = await axios.get("https://sembapp.azurewebsites.net/dokumen");
+    const response = await axios.get("http://localhost:5000/dokumen");
     setDokumen(response.data);
   };
   const getTransaction = async () => {
-    const response = await axios.get("https://sembapp.azurewebsites.net/transaction");
+    const response = await axios.get("http://localhost:5000/transaction");
     setDataTrans(response.data);
     console.log(dataTrans);
     setDokumen((prevState) => [
@@ -55,7 +69,7 @@ const Document = () => {
 
   const deleteDocument = async (id) => {
     try {
-      await axios.delete(`https://sembapp.azurewebsites.net/dokumen/${id}`);
+      await axios.delete(`http://localhost:5000/dokumen/${id}`);
       getDocument();
     } catch (error) {
       console.log(error);
@@ -63,16 +77,15 @@ const Document = () => {
   };
   return (
     <>
-      <div className="bg-abumuda w-full flex justify-center max-h-screen font-inter">
+      <div className="bg-abumuda w-full flex justify-center h-screen font-inter">
         <div className="absolute">
           <Navbar />
         </div>
         <div className="container py-16">
           <div className="content-center items-center">
-            <div className="pt-6 flex justify-content">
-              {" "}
-              Beranda
-              <span className="self-center">
+            <div className="pt-6 flex justify-start pb-3 text-xs">
+              <span className="text-gray-500">Beranda</span>
+              <span className="text-gray-500 self-center">
                 <BiChevronRight />
               </span>
               Dokumen

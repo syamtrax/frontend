@@ -5,8 +5,10 @@ import { BiChevronRight } from "react-icons/bi";
 import { HiArrowLeft } from "react-icons/hi";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 
 function EditProduk() {
+  const [cookies, setCookie] = useCookies(["accessToken"]);
   const [kodeProduk, setkodeProduk] = useState("");
   const [namaProduk, setnamaProduk] = useState("");
   const [kategoriProduk, setkategoriProduk] = useState("");
@@ -22,9 +24,9 @@ function EditProduk() {
   const [nama, setNama] = useState("");
   const navigate = useNavigate();
 
-  const refreshToken = async () => {
+  /*const refreshToken = async () => {
     try {
-      const response = await axios.get("https://sembapp.azurewebsites.net/token");
+      const response = await axios.get("http://localhost:5000/token");
       const decoded = jwt_decode(response.data.accessToken);
       setNama(decoded.namaPengguna);
     } catch (error) {
@@ -32,12 +34,12 @@ function EditProduk() {
         navigate("/");
       }
     }
-  };
+  };*/
 
   const saveProduk = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(`https://sembapp.azurewebsites.net/produk/${id}`, {
+      await axios.patch(`http://localhost:5000/produk/${id}`, {
         kodeProduk,
         namaProduk,
         kategoriProduk,
@@ -54,14 +56,26 @@ function EditProduk() {
       }
     }
   };
+  const decode = async () => {
+    try {
+      const decoded = jwt_decode(cookies.accessToken);
+      setNama(decoded.namaPengguna);
+      //setNamaToko(decoded.namaToko);
+    } catch (error) {
+      if (!cookies.accessToken) {
+        navigate("/");
+      }
+    }
+  };
 
   useEffect(() => {
     getProductById();
-    refreshToken();
+    //refreshToken();
+    decode();
   }, []);
 
   const getProductById = async () => {
-    const response = await axios.get(`https://sembapp.azurewebsites.net/produk/${id}}`);
+    const response = await axios.get(`http://localhost:5000/produk/${id}}`);
     setkodeProduk(response.data.kodeProduk);
     setnamaProduk(response.data.namaProduk);
     setkategoriProduk(response.data.kategoriProduk);
@@ -73,7 +87,7 @@ function EditProduk() {
   };
 
   return (
-    <div className="bg-abumuda w-full max-h-screen flex justify-center font-inter">
+    <div className="flex bg-abumuda w-full h-screen justify-center font-inter">
       <div className="absolute">
         <Navbar />
       </div>
@@ -91,7 +105,7 @@ function EditProduk() {
             <span>Edit Produk</span>
           </div>
           <h1 className="text-2xl font-bold pb-4">Halaman Edit Produk</h1>
-          <div className="flex flex-col w-full h-full rounded-md shadow-md bg-white p-6">
+          <div className="flex flex-col rounded-md shadow-md bg-white p-6">
             <div className="flex justify-between">
               <h2 className="text-lg font-semibold">Edit Produk</h2>
               <Link to="/produk">
@@ -250,9 +264,9 @@ function EditProduk() {
                 />
               </div>
               <div className="flex justify-end mt-6 gap-6">
-                <button className="w-28 py-1 border border-birumuda text-birumuda font-semibold rounded-full hover:underline">
+                {/* <button className="w-28 py-1 border border-birumuda text-birumuda font-semibold rounded-full hover:underline">
                   Batal
-                </button>
+                </button> */}
                 <button
                   className="w-28 py-1 border border-birumuda bg-birumuda text-white font-semibold rounded-full hover:underline"
                   type="submit"

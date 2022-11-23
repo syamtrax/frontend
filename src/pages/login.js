@@ -1,15 +1,13 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import axios from "axios";
 import loginBackground from "../assets/backgroundLogin.jpg";
 import { Link, useNavigate } from "react-router-dom";
-import useCookies from "react-use-cookie";
+import { useCookies } from "react-cookie";
 
 const Login = () => {
   const userRef = useRef();
   const errRef = useRef();
-  const [cookies, setCookie] = useCookies(["refreshToken"]);
-  const [refreshToken, setToken] = useState("");
-
+  const [cookies, setCookie] = useCookies(["accessToken"]);
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
@@ -53,37 +51,19 @@ const Login = () => {
     }
   }
   }*/
-  const Token = async (e) => {
-    try {
-      await axios.post("https://sembapp.azurewebsites.net/token", refreshToken);
-      console.log(refreshToken);
-    } catch (error) {
-      if (error.response) {
-        setErrMsg(error.response.data.msg);
-      }
-    }
-  };
-  useEffect(() => {
-    Token();
-  }, []);
 
   const Authentication = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "https://sembapp.azurewebsites.net/login",
-        {
-          user,
-          pwd,
-        }
-      );
-      console.log(response.data.refreshToken);
-      const accessToken = response.data.refreshToken;
-      setToken(accessToken);
-      setCookie(accessToken, {
+      const response = await axios.post("http://localhost:5000/login", {
+        user,
+        pwd,
+      });
+      console.log(response.data.accessToken);
+      const accessToken = response.data.accessToken;
+      setCookie("accessToken", accessToken, {
         path: "/",
       });
-
       navigate("/dashboard");
     } catch (error) {
       if (error.response) {
@@ -108,94 +88,93 @@ const Login = () => {
             src={loginBackground}
             className="absolute w-full h-full object-cover"
           />
-          <div className="w-1/4 p-6 m-auto bg-white rounded-md shadow-md z-10">
-            <h1 className="text-4xl font-bold text-center">SembApp</h1>
-            <form onSubmit={Authentication} className="mt-6">
-              <div className="mb-2">
-                <div className="flex justify-between">
-                  <label
-                    for="uname"
-                    className="block text-sm font-medium text-gray-800"
-                  >
-                    Nama Pengguna
-                  </label>
-                  <p
-                    ref={errRef}
-                    className={
-                      errMsg
-                        ? "block text-sm font-medium text-red-600"
-                        : "offscreen"
-                    }
-                    aria-live="assertive"
-                  >
-                    {errMsg}
-                  </p>
+          <div className="bg-white w-1/5 p-6 m-auto rounded-md shadow-md z-10">
+            <div className="flex flex-col gap-6">
+              <h1 className="text-4xl font-bold text-center">SembApp</h1>
+              <form onSubmit={Authentication} className="flex flex-col gap-6">
+                <div className="flex flex-col gap-3">
+                  <div>
+                    <label
+                      for="uname"
+                      className="block text-base text-gray-800"
+                    >
+                      Nama Pengguna
+                    </label>
+                    <p
+                      ref={errRef}
+                      className={
+                        errMsg
+                          ? "block text-sm font-medium text-red-600"
+                          : "offscreen"
+                      }
+                      aria-live="assertive"
+                    >
+                      {errMsg}
+                    </p>
+                    <input
+                      type="text"
+                      className="block border rounded-md w-full p-2 text-gray-900 bg-white focus:border-black"
+                      ref={userRef}
+                      autoComplete="off"
+                      value={user}
+                      onChange={(e) => setUser(e.target.value)}
+                      required
+                      placeholder="Nama Pengguna"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="password"
+                      className="block text-base text-gray-800"
+                    >
+                      Kata Sandi
+                    </label>
+                    <input
+                      type="password"
+                      className="block border rounded-md w-full p-2 text-gray-900 bg-white focus:border-black"
+                      value={pwd}
+                      onChange={(e) => setPwd(e.target.value)}
+                      required
+                      placeholder="Kata Sandi"
+                    />
+                  </div>
                 </div>
-                <input
-                  type="text"
-                  className="block w-full px-4 py-3 mt-2 text-black bg-white border rounded-md focus:border-black"
-                  ref={userRef}
-                  autoComplete="off"
-                  value={user}
-                  onChange={(e) => setUser(e.target.value)}
-                  required
-                  placeholder="Nama Pengguna"
-                />
-              </div>
-              <div className="mb-2">
-                <label
-                  for="password"
-                  className="block text-sm font-medium text-gray-800"
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <input type="checkbox" className="w-4 h-4 border rounded" />
+                    <label
+                      for="remember"
+                      className="ml-1 text-sm font-medium text-gray-800"
+                    >
+                      Ingat Saya
+                    </label>
+                  </div>
+                  <div className="flex items-center">
+                    <Link
+                      to="#"
+                      className="text-sm font-semibold text-birumuda hover:underline"
+                    >
+                      Lupa Kata Sandi?
+                    </Link>
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <button className="bg-birumuda text-white px-2 py-2 text-base font-semibold w-full radius rounded-full">
+                    Masuk
+                  </button>
+                </div>
+              </form>
+              <p className="text-sm text-center text-gray-800">
+                {" "}
+                Belum memiliki toko?{" "}
+                <Link
+                  to="/daftar"
+                  className="font-semibold text-birumuda hover:underline"
                 >
-                  Kata Sandi
-                </label>
-                <input
-                  type="password"
-                  className="block w-full px-4 py-3 mt-2 text-black bg-white border rounded-md focus:border-black"
-                  value={pwd}
-                  onChange={(e) => setPwd(e.target.value)}
-                  required
-                  placeholder="Kata Sandi"
-                />
-              </div>
-              <div className="flex items-center justify-between pt-3">
-                <div className="flex items-center">
-                  <input
-                    type="checkbox"
-                    className="w-4 h-4 text-black border rounded focus:border-black"
-                  />
-                  <label
-                    for="remember"
-                    className="ml-2 text-sm font-medium text-gray-800"
-                  >
-                    Ingat Saya
-                  </label>
-                </div>
-                <div className="flex items-center">
-                  <Link
-                    to="#"
-                    className="ml-2 text-sm font-medium text-birumuda"
-                  >
-                    Lupa Kata Sandi?
-                  </Link>
-                </div>
-              </div>
-              <div className="mt-6">
-                <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-birumuda rounded-md hover:bg-sky-400">
-                  Masuk
-                </button>
-              </div>
-            </form>
-            <p className="mt-8 text-xs font-light text-center text-gray-700">
-              {" "}
-              Belum memiliki toko?{" "}
-              <Link
-                to="/daftar"
-                className="font-medium text-birumuda hover:underline"
-              >
-                Daftarkan toko
-              </Link>
-            </p>
+                  Daftarkan toko
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
       )}

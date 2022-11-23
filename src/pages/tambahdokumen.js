@@ -3,6 +3,7 @@ import Navbar from "../components/navbar";
 import { Link, useNavigate } from "react-router-dom";
 import { BiChevronRight } from "react-icons/bi";
 import { HiArrowLeft } from "react-icons/hi";
+import { useCookies } from "react-cookie";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 
@@ -10,18 +11,30 @@ function TambahDokumen() {
   const [namaDokumen, setnamaDokumen] = useState("");
   const [kategoriDokumen, setkategoriDokumen] = useState("");
   const [deskripsiDokumen, setdeskripsiDokumen] = useState("");
+  const [cookies, setCookies] = useCookies(["accessToken"]);
   const [uploadBukti, setuploadBukti] = useState(null);
   const [msg, setMsg] = useState("");
   const [namaPengguna, setNama] = useState("");
   const navigate = useNavigate();
 
-  const refreshToken = async () => {
+  /*const refreshToken = async () => {
     try {
-      const response = await axios.get("https://sembapp.azurewebsites.net/token");
+      const response = await axios.get("http://localhost:5000/token");
       const decoded = jwt_decode(response.data.accessToken);
       setNama(decoded.namaPengguna);
     } catch (error) {
       if (error.response) {
+        navigate("/");
+      }
+    }
+  };*/
+  const decode = async () => {
+    try {
+      const decoded = jwt_decode(cookies.accessToken);
+      setNama(decoded.namaPengguna);
+      //setNamaToko(decoded.namaToko);
+    } catch (error) {
+      if (!cookies.accessToken) {
         navigate("/");
       }
     }
@@ -30,7 +43,7 @@ function TambahDokumen() {
   const saveDokumen = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://sembapp.azurewebsites.net/dokumen", {
+      await axios.post("http://localhost:5000/dokumen", {
         namaDokumen,
         kategoriDokumen,
         deskripsiDokumen,
@@ -46,11 +59,12 @@ function TambahDokumen() {
   };
 
   useEffect(() => {
-    refreshToken();
+    //refreshToken();
+    decode();
   }, []);
 
   return (
-    <div className="bg-abumuda w-full h-full flex justify-center font-inter">
+    <div className="flex bg-abumuda w-full h-screen justify-center font-inter">
       <div className="absolute">
         <Navbar />
       </div>
@@ -68,7 +82,7 @@ function TambahDokumen() {
             <span>Tambah Dokumen</span>
           </div>
           <h1 className="text-2xl font-bold pb-4">Halaman Tambah Dokumen</h1>
-          <div className="flex flex-col w-full h-full rounded-md shadow-md bg-white p-6">
+          <div className="flex flex-col rounded-md shadow-md bg-white p-6">
             <div className="flex justify-between mb-3">
               <h2 className="text-lg font-semibold">Tambah Dokumen</h2>
               <Link to="/dokumen">

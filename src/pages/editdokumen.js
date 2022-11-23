@@ -4,10 +4,12 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { BiChevronRight } from "react-icons/bi";
 import { HiArrowLeft } from "react-icons/hi";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 import jwt_decode from "jwt-decode";
 
 function EditDokumen() {
   const [namaDokumen, setnamaDokumen] = useState("");
+  const [cookies, setCookies] = useCookies(["accessToken"]);
   const [kategoriDokumen, setkategoriDokumen] = useState("");
   const [deskripsiDokumen, setdeskripsiDokumen] = useState("");
   const [uploadBukti, setuploadBukti] = useState(null);
@@ -17,13 +19,24 @@ function EditDokumen() {
   const [nama, setNama] = useState("");
   const navigate = useNavigate();
 
-  const refreshToken = async () => {
+  /*const refreshToken = async () => {
     try {
-      const response = await axios.get("https://sembapp.azurewebsites.net/token");
+      const response = await axios.get("http://localhost:5000/token");
       const decoded = jwt_decode(response.data.accessToken);
       setNama(decoded.namaPengguna);
     } catch (error) {
       if (error.response) {
+        navigate("/");
+      }
+    }
+  };*/
+  const decode = async () => {
+    try {
+      const decoded = jwt_decode(cookies.accessToken);
+      setNama(decoded.namaPengguna);
+      //setNamaToko(decoded.namaToko);
+    } catch (error) {
+      if (!cookies.accessToken) {
         navigate("/");
       }
     }
@@ -32,7 +45,7 @@ function EditDokumen() {
   const saveDokumen = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(`https://sembapp.azurewebsites.net/dokumen/${id}`, {
+      await axios.patch(`http://localhost:5000/dokumen/${id}`, {
         namaDokumen,
         kategoriDokumen,
         deskripsiDokumen,
@@ -48,11 +61,11 @@ function EditDokumen() {
 
   useEffect(() => {
     getDocumentById();
-    refreshToken();
+    decode();
   }, []);
 
   const getDocumentById = async () => {
-    const response = await axios.get(`https://sembapp.azurewebsites.net/dokumen/${id}}`);
+    const response = await axios.get(`http://localhost:5000/dokumen/${id}}`);
     setnamaDokumen(response.data.namaDokumen);
     setkategoriDokumen(response.data.kategoriDokumen);
     setdeskripsiDokumen(response.data.deskripsiDokumen);
@@ -60,7 +73,7 @@ function EditDokumen() {
   };
 
   return (
-    <div className="bg-abumuda w-full h-full flex justify-center font-inter">
+    <div className="flex bg-abumuda w-full h-screen justify-center font-inter">
       <div className="absolute">
         <Navbar />
       </div>
@@ -160,9 +173,9 @@ function EditDokumen() {
               </div>
               <div className="flex justify-end mt-6 gap-6">
                 <Link to="/dokumen">
-                  <button className="w-28 py-1 border border-birumuda text-birumuda font-semibold rounded-full hover:underline">
+                  {/* <button className="w-28 py-1 border border-birumuda text-birumuda font-semibold rounded-full hover:underline">
                     Batal
-                  </button>
+                  </button> */}
                 </Link>
                 <button
                   className="w-28 py-1 border border-birumuda bg-birumuda text-white font-semibold rounded-full hover:underline"
