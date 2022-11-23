@@ -55,7 +55,8 @@ const Login = () => {
   }*/
   const Token = async (e) => {
     try {
-      await axios.post("https://sembapp.azurewebsites.net/token", token)
+      await axios.post("https://sembapp.azurewebsites.net/token", token);
+      console.log(token);
     } catch (error) {
       if (error.response) {
         setErrMsg(error.response.data.msg);
@@ -79,10 +80,12 @@ const Login = () => {
       );
       console.log(response.data.refreshToken);
       const accessToken = response.data.refreshToken;
+      console.log(token);
       setToken(accessToken);
       setCookie(accessToken, {
         path: "/",
       });
+      
       navigate("/dashboard");
     } catch (error) {
       if (error.response) {
