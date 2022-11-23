@@ -105,7 +105,7 @@ const Dashboard = () => {
   }, []);
 
   const getTransaction = async () => {
-    const response = await axios.get("http://localhost:5000/transaction", {
+    const response = await axios.get("https://sembapp.azurewebsites.net/transaction", {
       headers: {
         authorization: `Bearer ${cookies.accessToken}`,
       },

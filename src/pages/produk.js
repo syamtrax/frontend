@@ -45,13 +45,13 @@ const Product = () => {
   }, []);
 
   const getProduct = async () => {
-    const response = await axios.get("http://localhost:5000/produk");
+    const response = await axios.get("https://sembapp.azurewebsites.net/produk");
     setProduk(response.data);
   };
 
   const deleteProduct = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/produk/${id}`);
+      await axios.delete(`https://sembapp.azurewebsites.net/produk/${id}`);
       getProduct();
     } catch (error) {
       console.log(error);

@@ -12,7 +12,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const Logout = async () => {
     try {
-      await axios.delete("http://localhost:5000/logout", {
+      await axios.delete("https://sembapp.azurewebsites.net/logout", {
         headers: {
           authorization: `Bearer ${cookies.accessToken}`,
         },

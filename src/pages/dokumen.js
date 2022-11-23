@@ -47,11 +47,11 @@ const Document = () => {
   }, []);
 
   const getDocument = async () => {
-    const response = await axios.get("http://localhost:5000/dokumen");
+    const response = await axios.get("https://sembapp.azurewebsites.net/dokumen");
     setDokumen(response.data);
   };
   const getTransaction = async () => {
-    const response = await axios.get("http://localhost:5000/transaction");
+    const response = await axios.get("https://sembapp.azurewebsites.net/transaction");
     setDataTrans(response.data);
     console.log(dataTrans);
     setDokumen((prevState) => [
@@ -69,7 +69,7 @@ const Document = () => {
 
   const deleteDocument = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/dokumen/${id}`);
+      await axios.delete(`https://sembapp.azurewebsites.net/dokumen/${id}`);
       getDocument();
     } catch (error) {
       console.log(error);

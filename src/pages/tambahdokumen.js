@@ -43,7 +43,7 @@ function TambahDokumen() {
   const saveDokumen = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/dokumen", {
+      await axios.post("https://sembapp.azurewebsites.net/dokumen", {
         namaDokumen,
         kategoriDokumen,
         deskripsiDokumen,

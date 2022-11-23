@@ -45,7 +45,7 @@ function EditDokumen() {
   const saveDokumen = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(`http://localhost:5000/dokumen/${id}`, {
+      await axios.patch(`https://sembapp.azurewebsites.net/dokumen/${id}`, {
         namaDokumen,
         kategoriDokumen,
         deskripsiDokumen,
@@ -65,7 +65,7 @@ function EditDokumen() {
   }, []);
 
   const getDocumentById = async () => {
-    const response = await axios.get(`http://localhost:5000/dokumen/${id}}`);
+    const response = await axios.get(`https://sembapp.azurewebsites.net/dokumen/${id}}`);
     setnamaDokumen(response.data.namaDokumen);
     setkategoriDokumen(response.data.kategoriDokumen);
     setdeskripsiDokumen(response.data.deskripsiDokumen);

@@ -48,7 +48,7 @@ function TambahProduk() {
   const saveProduk = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/produk", {
+      await axios.post("https://sembapp.azurewebsites.net/produk", {
         kodeProduk,
         namaProduk,
         kategoriProduk,
