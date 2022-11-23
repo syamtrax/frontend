@@ -8,7 +8,7 @@ const Login = () => {
   const userRef = useRef();
   const errRef = useRef();
   const [cookies, setCookie] = useCookies(["refreshToken"]);
-  const [token, setToken] = useState("")
+  const [refreshToken, setToken] = useState("");
 
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
@@ -55,18 +55,17 @@ const Login = () => {
   }*/
   const Token = async (e) => {
     try {
-      await axios.post("https://sembapp.azurewebsites.net/token", token);
-      console.log(token);
+      await axios.post("https://sembapp.azurewebsites.net/token", refreshToken);
+      console.log(refreshToken);
     } catch (error) {
       if (error.response) {
         setErrMsg(error.response.data.msg);
       }
     }
-  }
+  };
   useEffect(() => {
     Token();
   }, []);
-  
 
   const Authentication = async (e) => {
     e.preventDefault();
@@ -80,12 +79,11 @@ const Login = () => {
       );
       console.log(response.data.refreshToken);
       const accessToken = response.data.refreshToken;
-      console.log(token);
       setToken(accessToken);
       setCookie(accessToken, {
         path: "/",
       });
-      
+
       navigate("/dashboard");
     } catch (error) {
       if (error.response) {
