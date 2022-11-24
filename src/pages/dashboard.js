@@ -215,7 +215,7 @@ const Dashboard = () => {
                 </div>
                 <div className="h-full">
                   {transaction.length > 0 && (
-                    <table className="flex table-fixed justify-center py-2 overflow-y-auto h-80">
+                    <table className="flex table-fixed justify-center py-2 overflow-y-auto h-80 pb-5">
                       <tbody>
                         {transaction.map((trans) => {
                           if (trans.namaPengguna === nama) {
