@@ -253,7 +253,7 @@ const Dashboard = () => {
                     </table>
                   )}
                   {transaction.length === 0 && (
-                    <div className="flex flex-col items-center animate-fade-in-up">
+                    <div className="flex flex-col items-center animate-fade-in-up pb-5">
                       <div role="status">
                         <svg
                           aria-hidden="true"
