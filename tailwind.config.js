@@ -1,3 +1,4 @@
+const { ColorizeSharp } = require("@material-ui/icons");
 const colors = require("tailwindcss/colors");
 
 module.exports = {
@@ -214,7 +215,7 @@ module.exports = {
       "2xl": "0 25px 25px rgba(0, 0, 0, 0.15)",
       none: "0 0 #0000",
     },
-    fill: { current: "currentColor" },
+    fill: { current: "currentColor", blue: colors.blue },
     grayscale: {
       0: "0",
       DEFAULT: "100%",
