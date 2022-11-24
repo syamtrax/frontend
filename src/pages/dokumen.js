@@ -207,7 +207,7 @@ const Document = () => {
                     role="tabpanel"
                     aria-labelledby="semua-tab"
                   >
-                    {dokumen > 0 && (
+                    {dokumen.length > 0 && (
                       <table className="w-full table-fixed justify-center overflow-y-auto">
                         <thead className="">
                           <tr className="border-b-2 border-gray-300">
