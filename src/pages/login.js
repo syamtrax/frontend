@@ -14,14 +14,16 @@ const Login = () => {
   const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
 
-
   const Authentication = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://sembapp.azurewebsites.net/login", {
-        user,
-        pwd,
-      });
+      const response = await axios.post(
+        "https://sembapp.azurewebsites.net/login",
+        {
+          user,
+          pwd,
+        }
+      );
       console.log(response.data.accessToken);
       const accessToken = response.data.accessToken;
       setCookie("accessToken", accessToken, {
@@ -51,7 +53,7 @@ const Login = () => {
             src={loginBackground}
             className="absolute w-full h-full object-cover"
           />
-          <div className="bg-white w-1/5 p-6 m-auto rounded-md shadow-md z-10">
+          <div className="bg-white w-1/4 p-6 m-auto rounded-md shadow-md z-10">
             <div className="flex flex-col gap-6">
               <h1 className="text-4xl font-bold text-center">SembApp</h1>
               <form onSubmit={Authentication} className="flex flex-col gap-6">

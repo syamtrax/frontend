@@ -12,7 +12,6 @@ import moment from "moment";
 const Product = () => {
   const [produk, setProduk] = useState([]);
   const [cookies, setCookies] = useCookies(["accessToken"]);
-
   const [nama, setNama] = useState("");
   const navigate = useNavigate();
   var startdate = moment();
@@ -48,6 +47,7 @@ const Product = () => {
       console.log(error);
     }
   };
+
   return (
     <>
       <div className="bg-abumuda w-full flex justify-center h-screen font-inter">
@@ -70,12 +70,12 @@ const Product = () => {
                 className="w-1/6 bg-white shadow-md rounded-md flex h-8"
                 to="/tambahproduk"
               >
-                <button className="w-full text-sm text-center items-center content-center  text-white transition-colors duration-200 transform bg-birumuda rounded-md hover:bg-sky-400">
+                <button className="w-full text-sm text-center items-center content-center text-white transition-colors duration-200 transform bg-birumuda rounded-md hover:bg-sky-400">
                   + Tambah Produk
                 </button>
               </Link>
               <div className="w-1/3 bg-white shadow-md rounded-md h-8">
-                <div className="w-full text-center items-center content-center">
+                <div className="w-full p-1 text-center items-center content-center">
                   Jumlah Produk : {produk.length}
                 </div>
               </div>
@@ -115,7 +115,7 @@ const Product = () => {
                     <div className="flex items-center">
                       <form action="">
                         <div className="relative flex items-center">
-                          <AiOutlineSearch className="absolute text-gray-400 ml-5" />
+                          <AiOutlineSearch className="absolute text-gray-400 ml-6" />
                           <input
                             type="text"
                             placeholder="Cari Produk"
@@ -137,14 +137,14 @@ const Product = () => {
                   {produk.length > 0 && (
                     <table className="w-full table-fixed justify-center overflow-y-auto">
                       <thead className="">
-                        <tr className="border-b-2 border-gray-300">
-                          <th className="w-1/6 py-2">KODE</th>
-                          <th className="w-1/5">NAMA</th>
-                          <th className="w-1/5">KATEGORI</th>
-                          <th className="w-1/5">HARGA BELI</th>
-                          <th className="w-1/5">HARGA JUAL</th>
-                          <th className="w-1/6">STOK</th>
-                          <th className="w-1/5">EDIT</th>
+                        <tr className="border-b-2 border-gray-300 text-gray-500 w-1/5 text-sm">
+                          <th className="font-semibold">KODE</th>
+                          <th className="font-semibold">NAMA</th>
+                          <th className="font-semibold">KATEGORI</th>
+                          <th className="font-semibold">HARGA BELI</th>
+                          <th className="font-semibold">HARGA JUAL</th>
+                          <th className="font-semibold">STOK</th>
+                          <th className="font-semibold">EDIT</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -153,14 +153,12 @@ const Product = () => {
                             return (
                               <tr
                                 key={dat.kodeProduk}
-                                className="py-8 border-b-2 border-gray-300"
+                                className="border-b-2 border-gray-300 text-sm"
                               >
                                 <td className="w-1/5 text-center">
                                   {dat.kodeProduk}
                                 </td>
-                                <td className="w-1/5 text-left">
-                                  {dat.namaProduk}
-                                </td>
+                                <td className="w-1/5">{dat.namaProduk}</td>
                                 <td className="w-1/5 text-center">
                                   {dat.kategoriProduk}
                                 </td>
@@ -174,7 +172,6 @@ const Product = () => {
                                   {dat.stokProduk}
                                 </td>
                                 <td className="w-1/5 text-center">
-                                  {" "}
                                   <Link
                                     to={`editproduk/${dat.kodeProduk}`}
                                     className="font-bold text-birumuda mr-2"

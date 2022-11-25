@@ -3,7 +3,6 @@ import Navbar from "../components/navbar.js";
 import { BiChevronRight } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
 import { HiFilter } from "react-icons/hi";
-import fotoprofil from "../assets/avatardefault_92824.png";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
@@ -68,6 +67,7 @@ const Document = () => {
       console.log(error);
     }
   };
+
   return (
     <>
       <div className="bg-abumuda w-full flex justify-center h-screen font-inter">
@@ -90,12 +90,12 @@ const Document = () => {
                 className="w-1/6 bg-white shadow-md rounded-md flex h-8"
                 to="/tambahdokumen"
               >
-                <button className="w-full text-sm text-center items-center content-center  text-white transition-colors duration-200 transform bg-birumuda rounded-md hover:bg-sky-400">
+                <button className="w-full text-sm text-center items-center content-center text-white transition-colors duration-200 transform bg-birumuda rounded-md hover:bg-sky-400">
                   + Tambah Dokumen
                 </button>
               </Link>
               <div className="w-1/3 bg-white shadow-md rounded-md h-8">
-                <div className="w-full text-center items-center content-center">
+                <div className="w-full p-1 text-center items-center content-center">
                   Total Dokumen :
                 </div>
               </div>
@@ -111,7 +111,7 @@ const Document = () => {
                     <div className="flex items-center">
                       <form action="">
                         <div className="relative flex items-center">
-                          <AiOutlineSearch className="absolute text-gray-400 ml-5" />
+                          <AiOutlineSearch className="absolute text-gray-400 ml-6" />
                           <input
                             type="text"
                             placeholder="Cari Produk"
@@ -148,6 +148,32 @@ const Document = () => {
                         Semua
                       </button>
                     </li>
+                    <li role="presentation">
+                      <button
+                        className="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-black hover:border-gray-300  text-gray-500 border-gray-100"
+                        id="penjualan-tab"
+                        data-tabs-target="#penjualan"
+                        type="button"
+                        role="tab"
+                        aria-controls="penjualan"
+                        aria-selected="false"
+                      >
+                        Penjualan
+                      </button>
+                    </li>
+                    <li role="presentation">
+                      <button
+                        className="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-black hover:border-gray-300  text-gray-500 border-gray-100"
+                        id="kulakan-tab"
+                        data-tabs-target="#kulakan"
+                        type="button"
+                        role="tab"
+                        aria-controls="kulakan"
+                        aria-selected="false"
+                      >
+                        Kulakan
+                      </button>
+                    </li>
                     <li className="mr-2" role="presentation">
                       <button
                         className="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-black hover:border-gray-300 text-gray-500 border-gray-100"
@@ -174,19 +200,6 @@ const Document = () => {
                         Hutang
                       </button>
                     </li>
-                    <li role="presentation">
-                      <button
-                        className="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-black hover:border-gray-300  text-gray-500 border-gray-100"
-                        id="kulakan-tab"
-                        data-tabs-target="#kulakan"
-                        type="button"
-                        role="tab"
-                        aria-controls="kulakan"
-                        aria-selected="false"
-                      >
-                        Kulakan
-                      </button>
-                    </li>
                   </ul>
                 </div>
                 <div id="tabDokumenContent">
@@ -199,13 +212,15 @@ const Document = () => {
                     {dokumen.length > 0 && (
                       <table className="w-full table-fixed justify-center overflow-y-auto">
                         <thead className="">
-                          <tr className="border-b-2 border-gray-300">
-                            <th className="w-1/6 py-2">DESKRIPSI</th>
-                            <th className="w-1/5">KATEGORI</th>
-                            <th className="w-1/5">STATUS</th>
-                            <th className="w-1/5">TANGGAL TRANSAKSI</th>
-                            <th className="w-1/5">JUMLAH</th>
-                            <th className="w-1/5">EDIT</th>
+                          <tr className="border-b-2 border-gray-300 text-gray-500 w-1/5 text-sm">
+                            <th className="font-semibold">NAMA</th>
+                            <th className="font-semibold">KATEGORI</th>
+                            <th className="font-semibold">STATUS</th>
+                            <th className="font-semibold">METODE PEMBAYARAN</th>
+                            <th className="font-semibold">TANGGAL TRANSAKSI</th>
+                            <th className="font-semibold">JUMLAH</th>
+                            <th className="font-semibold">MEMBER</th>
+                            <th className="font-semibold">EDIT</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -217,24 +232,29 @@ const Document = () => {
                                   className="py-8 border-b-2 border-gray-300"
                                 >
                                   <td className="w-1/5 text-center">
-                                    {dat.idtrans}
+                                    {dat.namaDokumen}
                                   </td>
-                                  <td className="w-1/5 text-left">
+                                  <td className="w-1/5">
                                     {dat.kategoriDokumen}
                                   </td>
                                   <td className="w-1/5 text-center">
-                                    {dat.status}
+                                    {dat.statusDokumen}
                                   </td>
                                   <td className="w-1/5 text-center">
-                                    {moment(dat.createdAt).format(
+                                    {dat.metodePembayaran}
+                                  </td>
+                                  <td className="w-1/5 text-center">
+                                    {moment(dat.tglTransaksi).format(
                                       "MMMM Do YYYY, h:mm:ss a"
                                     )}
                                   </td>
                                   <td className="w-1/5 text-center">
-                                    {dat.price}
+                                    {dat.jumlah}
                                   </td>
                                   <td className="w-1/5 text-center">
-                                    {" "}
+                                    {dat.member}
+                                  </td>
+                                  <td className="w-1/5 text-center">
                                     <Link
                                       to={`editdokumen/${dat.id}`}
                                       className="font-bold text-birumuda mr-2"

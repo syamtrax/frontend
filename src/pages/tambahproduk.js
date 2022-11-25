@@ -18,7 +18,6 @@ function TambahProduk() {
   const [satuanProduk, setsatuanProduk] = useState("");
   const [tanggalKedaluwarsa, settanggalKedaluwarsa] = useState("");
   const [msg, setMsg] = useState("");
-
   const [namaPengguna, setNama] = useState("");
   const navigate = useNavigate();
 
@@ -54,8 +53,9 @@ function TambahProduk() {
       }
     }
   };
+
   useEffect(() => {
-    decode()
+    decode();
   }, []);
 
   return (
@@ -101,35 +101,43 @@ function TambahProduk() {
                   required
                 />
               </div>
-              <div className="flex flex-col">
-                <label className="text-base font-medium text-birumuda">
-                  Nama Produk
-                </label>
-                <input
-                  className="border-b-2 w-1/2 p-1 text-gray-500 bg-white"
-                  type="text"
-                  value={namaProduk}
-                  onChange={(e) => setnamaProduk(e.target.value)}
-                  placeholder="Masukkan Nama Produk"
-                  required
-                />
-              </div>
-              <div className="flex flex-col">
-                <label className="text-base font-medium text-birumuda">
-                  Kategori Produk
-                </label>
-                <select
-                  className="border-b-2 w-1/2 p-1 text-gray-500 bg-white"
-                  type="text"
-                  value={kategoriProduk}
-                  onChange={(e) => setkategoriProduk(e.target.value)}
-                  required
-                >
-                  <option value="none">Pilih Kategori Produk</option>
-                  <option value="Beras">Beras</option>
-                  <option value="Minyak">Minyak</option>
-                  <option value="Gula">Gula</option>
-                </select>
+              <div className="flex justify-between gap-3">
+                <div className="flex flex-col w-1/2">
+                  <label className="text-base font-medium text-birumuda">
+                    Nama Produk
+                  </label>
+                  <input
+                    className="border-b-2 w-full p-1 text-gray-500 bg-white"
+                    type="text"
+                    value={namaProduk}
+                    onChange={(e) => setnamaProduk(e.target.value)}
+                    placeholder="Masukkan Nama Produk"
+                    required
+                  />
+                </div>
+                <div className="flex flex-col w-1/2">
+                  <label className="text-base font-medium text-birumuda">
+                    Kategori Produk
+                  </label>
+                  <select
+                    className="border-b-2 w-full p-1 text-gray-500 bg-white"
+                    type="text"
+                    value={kategoriProduk}
+                    onChange={(e) => setkategoriProduk(e.target.value)}
+                    required
+                  >
+                    <option value="none">Pilih Kategori Produk</option>
+                    <option value="Beras">Beras</option>
+                    <option value="Gula">Gula Pasir</option>
+                    <option value="Minyak">Minyak goreng dan mentega</option>
+                    <option value="Daging">Daging</option>
+                    <option value="Telur">Telur ayam</option>
+                    <option value="Susu">Susu</option>
+                    <option value="Bawang">Bawang</option>
+                    <option value="Gas">Gas (LPG) dan minyak tanah</option>
+                    <option value="Garam">Garam</option>
+                  </select>
+                </div>
               </div>
               <div className="flex justify-between gap-3">
                 <div className="flex flex-col w-1/2">
@@ -204,11 +212,6 @@ function TambahProduk() {
                 />
               </div>
               <div className="flex justify-end mt-6 gap-6">
-                {/* <Link to = "/produk">
-                <button className="w-28 py-1 border border-birumuda text-birumuda font-semibold rounded-full hover:underline">
-                  Batal
-                </button>
-                </Link> */}
                 <button
                   className="w-28 py-1 border border-birumuda bg-birumuda text-white font-semibold rounded-full hover:underline"
                   type="submit"

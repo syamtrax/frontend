@@ -19,7 +19,6 @@ const Dashboard = () => {
   const [token, setToken] = useState("");
   const [expire, setExpire] = useState("");
   var startdate = moment();
-
   const navigate = useNavigate();
 
   const decode = async () => {
@@ -92,7 +91,7 @@ const Dashboard = () => {
         </div>
         <div className="container py-16">
           <div className="content-center items-center">
-            <div className="pt-6">Beranda</div>
+            <div className="pt-6 text-xs text-gray-500">Beranda</div>
             <div className="text-2xl font-bold pb-4">Halaman Dashboard</div>
             <div className="relative">
               <img

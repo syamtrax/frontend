@@ -20,7 +20,6 @@ function EditProduk() {
   const [msg, setMsg] = useState("");
   const { kode } = useParams();
   const id = kode;
-
   const [nama, setNama] = useState("");
   const navigate = useNavigate();
 
@@ -44,6 +43,7 @@ function EditProduk() {
       }
     }
   };
+
   const decode = async () => {
     try {
       const decoded = jwt_decode(cookies.accessToken);
@@ -61,7 +61,9 @@ function EditProduk() {
   }, []);
 
   const getProductById = async () => {
-    const response = await axios.get(`https://sembapp.azurewebsites.net/produk/${id}}`);
+    const response = await axios.get(
+      `https://sembapp.azurewebsites.net/produk/${id}}`
+    );
     setkodeProduk(response.data.kodeProduk);
     setnamaProduk(response.data.namaProduk);
     setkategoriProduk(response.data.kategoriProduk);
@@ -119,43 +121,51 @@ function EditProduk() {
                   placeholder="12345"
                 />
               </div>
-              <div className="flex flex-col">
-                <label
-                  className="text-base font-medium text-birumuda"
-                  htmlFor="Nama Produk"
-                >
-                  Nama Produk
-                </label>
-                <input
-                  className="border-b-2 w-1/2 p-1 text-gray-500 bg-white"
-                  id="Nama Produk"
-                  type="text"
-                  value={namaProduk}
-                  onChange={(e) => setnamaProduk(e.target.value)}
-                  name="Nama Produk"
-                  placeholder="Masukkan Nama Produk"
-                />
-              </div>
-              <div className="flex flex-col">
-                <label
-                  className="text-base font-medium text-birumuda"
-                  htmlFor="kategori Produk"
-                >
-                  Kategori Produk
-                </label>
-                <select
-                  className="border-b-2 w-1/2 p-1 text-gray-500 bg-white"
-                  id="kategori Produk"
-                  type="text"
-                  value={kategoriProduk}
-                  onChange={(e) => setkategoriProduk(e.target.value)}
-                  name="Kategori Produk"
-                >
-                  <option value="none">Pilih Kategori Produk</option>
-                  <option value="Beras">Beras</option>
-                  <option value="Minyak">Minyak</option>
-                  <option value="Gula">Gula</option>
-                </select>
+              <div className="flex justify-between gap-3">
+                <div className="flex flex-col w-1/2">
+                  <label
+                    className="text-base font-medium text-birumuda"
+                    htmlFor="Nama Produk"
+                  >
+                    Nama Produk
+                  </label>
+                  <input
+                    className="border-b-2 w-full p-1 text-gray-500 bg-white"
+                    id="Nama Produk"
+                    type="text"
+                    value={namaProduk}
+                    onChange={(e) => setnamaProduk(e.target.value)}
+                    name="Nama Produk"
+                    placeholder="Masukkan Nama Produk"
+                  />
+                </div>
+                <div className="flex flex-col w-1/2">
+                  <label
+                    className="text-base font-medium text-birumuda"
+                    htmlFor="kategori Produk"
+                  >
+                    Kategori Produk
+                  </label>
+                  <select
+                    className="border-b-2 w-full p-1 text-gray-500 bg-white"
+                    id="kategori Produk"
+                    type="text"
+                    value={kategoriProduk}
+                    onChange={(e) => setkategoriProduk(e.target.value)}
+                    name="Kategori Produk"
+                  >
+                    <option value="none">Pilih Kategori Produk</option>
+                    <option value="Beras">Beras</option>
+                    <option value="Gula">Gula Pasir</option>
+                    <option value="Minyak">Minyak goreng dan mentega</option>
+                    <option value="Daging">Daging</option>
+                    <option value="Telur">Telur ayam</option>
+                    <option value="Susu">Susu</option>
+                    <option value="Bawang">Bawang</option>
+                    <option value="Gas">Gas (LPG) dan minyak tanah</option>
+                    <option value="Garam">Garam</option>
+                  </select>
+                </div>
               </div>
               <div className="flex justify-between gap-3">
                 <div className="flex flex-col w-1/2">
@@ -250,9 +260,6 @@ function EditProduk() {
                 />
               </div>
               <div className="flex justify-end mt-6 gap-6">
-                {/* <button className="w-28 py-1 border border-birumuda text-birumuda font-semibold rounded-full hover:underline">
-                  Batal
-                </button> */}
                 <button
                   className="w-28 py-1 border border-birumuda bg-birumuda text-white font-semibold rounded-full hover:underline"
                   type="submit"
