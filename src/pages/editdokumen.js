@@ -73,7 +73,6 @@ function EditDokumen() {
     setJumlah(response.data.jumlah);
     setMember(response.data.member);
     setdeskripsiDokumen(response.data.deskripsiDokumen);
-    setuploadBukti(response.data.uploadBukti.toString("base64"));
   };
 
   return (
@@ -221,22 +220,22 @@ function EditDokumen() {
                   <label className="text-base font-medium text-birumuda">
                     Unggah Bukti Dokumen
                   </label>
-                  {uploadBukti === null && (
-                    <input
-                      className="border-2 border-dashed w-full p-1 text-gray-500 bg-white"
-                      type="file"
-                      name="Bukti Dokumen"
-                      onChange={(e) => {
-                        console.log(e.target.files[0]);
-                        setuploadBukti(e.target.files[0]);
-                      }}
-                    />
-                  )}
-                  {uploadBukti !== null && (
-                    <div className="w-full">
+                  <input
+                    className="border-2 border-dashed w-full p-1 text-gray-500 bg-white"
+                    type="file"
+                    name="Bukti Dokumen"
+                    onChange={(e) => {
+                      console.log(e.target.files[0]);
+                      setuploadBukti(e.target.files[0]);
+                    }}
+                  />
+                  <div className="w-full">
+                    {uploadBukti && (
                       <div className="flex w-full gap-6">
                         <img
-                          className="content-center w-[100]"
+                          className="content-center"
+                          alt="not found"
+                          width={"100px"}
                           src={URL.createObjectURL(uploadBukti)}
                         />
                         <button onClick={() => setuploadBukti(null)}>
@@ -245,8 +244,8 @@ function EditDokumen() {
                           </div>
                         </button>
                       </div>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
               </div>
               <div className="flex justify-end mt-6 gap-6">
