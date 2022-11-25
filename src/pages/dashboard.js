@@ -20,7 +20,7 @@ const Dashboard = () => {
   const [token, setToken] = useState("");
   const [expire, setExpire] = useState("");
   var startdate = moment();
-  var yesterday = moment().subtract(1, "days");
+  var yesterday = moment().subtract(1, "days").format("MMM Do YY");
   var date = moment().format("MMM Do YY");
   const navigate = useNavigate();
 
