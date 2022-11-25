@@ -84,7 +84,7 @@ const Product = () => {
               <div className="p-4 h-22 w-full bg-white rounded-md items-center shadow-md text-center text-lg">
                 Notifikasi Kedaluwarsa
                 <div className="text-center flex justify-center gap-2">Produk: {produk.map((prod, i)=>{
-                  if ((moment(prod.tanggalKedaluwarsa).diff(startdate,'days')) < 7){
+                  if ((moment(prod.tanggalKedaluwarsa).diff(startdate,'days')) < 7 && prod.namaPengguna == nama){
                   return(
                     <div key={i}>
                       <div className="">{prod.namaProduk}</div>

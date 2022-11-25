@@ -258,7 +258,7 @@ const Dashboard = () => {
                           moment(prod.tanggalKedaluwarsa).diff(
                             startdate,
                             "days"
-                          ) < 7
+                          ) < 7 && prod.namaPengguna == nama
                         ) {
                           return (
                             <tr key={i}>
