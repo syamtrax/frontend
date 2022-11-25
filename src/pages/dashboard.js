@@ -35,7 +35,7 @@ const Dashboard = () => {
   };
 
   const getProduct = async () => {
-    const response = await axios.get("http://localhost:5000/produk");
+    const response = await axios.get("https://sembapp.azurewebsites.net/produk");
     setProduk(response.data);
     //setProduk(moment(response.data.tanggalKedaluwarsa));
     console.log(startdate.subtract(moment(produk.tanggalKedaluwarsa)));
