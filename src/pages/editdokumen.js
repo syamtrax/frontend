@@ -237,7 +237,7 @@ function EditDokumen() {
                       <div className="flex w-full gap-6">
                         <img
                           className="content-center w-[100]"
-                          src={createObjectURL(uploadBukti)}
+                          src={URL.createObjectURL(uploadBukti)}
                         />
                         <button onClick={() => setuploadBukti(null)}>
                           <div className="w-28 py-1 border border-birumuda bg-birumuda text-white font-semibold rounded-full hover:underline">
