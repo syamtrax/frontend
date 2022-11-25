@@ -378,7 +378,7 @@ const Dashboard = () => {
                       })}
                     </div>
                   </div>}
-                  {produk.length === 0 && (
+                  {dokumen.length && transaction.length === 0 && (
                     <div className="flex flex-col items-center animate-fade-in-up pb-5">
                       <div role="status">
                         <svg
