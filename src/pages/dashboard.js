@@ -76,7 +76,7 @@ const Dashboard = () => {
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
-  const persentase = ((penjualanthisday - penjualanyesterday)/penjualanyesterday) * 100
+  var persentase = ((penjualanthisday - penjualanyesterday)/penjualanyesterday) * 100
 
   const totaldokumen = dokumen.reduce((count, dokumen) => {
     if (dokumen.namaPengguna === nama) {
