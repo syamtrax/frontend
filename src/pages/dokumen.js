@@ -245,7 +245,7 @@ const Document = () => {
                                   </td>
                                   <td className="w-1/5 text-center">
                                     {moment(dat.tglTransaksi).format(
-                                      "MMMM Do YYYY, h:mm:ss a"
+                                      "Do MMMM YYYY"
                                     )}
                                   </td>
                                   <td className="w-1/5 text-center">
