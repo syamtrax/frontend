@@ -201,7 +201,11 @@ const Dashboard = () => {
                                       .toString()
                                       .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                                   </div>
-                                  <div>{trans.createdAt}</div>
+                                  <div>
+                                    {moment(trans.createdAt).format(
+                                      "MMMM Do YYYY, h:mm:ss a"
+                                    )}
+                                  </div>
                                 </td>
                                 <td className="w-32">{trans.member}</td>
                                 <td className="w-32">

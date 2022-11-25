@@ -8,6 +8,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import jwt_decode from "jwt-decode";
+import moment from "moment";
 
 const Document = () => {
   const [dokumen, setDokumen] = useState([]);
@@ -225,7 +226,9 @@ const Document = () => {
                                     {dat.status}
                                   </td>
                                   <td className="w-1/5 text-center">
-                                    {dat.createdAt}
+                                    {moment(dat.createdAt).format(
+                                      "MMMM Do YYYY, h:mm:ss a"
+                                    )}
                                   </td>
                                   <td className="w-1/5 text-center">
                                     {dat.price}
