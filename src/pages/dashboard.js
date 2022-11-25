@@ -20,6 +20,7 @@ const Dashboard = () => {
   const [token, setToken] = useState("");
   const [expire, setExpire] = useState("");
   var startdate = moment();
+  var date = moment().format("MMM Do YY");
   const navigate = useNavigate();
 
   const decode = async () => {
@@ -48,6 +49,19 @@ const Dashboard = () => {
     transaction.createdAt = date.toISOString().substring(0, 10);
   });
 
+  const penjualanthisday = transaction
+    .reduce((total, transaction) => {
+      if (
+        transaction.namaPengguna === nama &&
+        moment(transaction.createdAt).format("MMM Do YY") === date
+      ) {
+        total += transaction.price;
+      }
+      return total;
+    }, 0)
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
   const penjualan = transaction
     .reduce((total, transaction) => {
       if (transaction.namaPengguna === nama) {
@@ -66,7 +80,9 @@ const Dashboard = () => {
   }, 0);
 
   const getDocument = async () => {
-    const response = await axios.get("https://sembapp.azurewebsites.net/dokumen");
+    const response = await axios.get(
+      "https://sembapp.azurewebsites.net/dokumen"
+    );
     setDokumen(response.data);
     console.log(dokumen);
   };
@@ -136,7 +152,7 @@ const Dashboard = () => {
                   <div className="">Penjualan Hari Ini</div>
                   <div className="flex justify-between">
                     <div className="flex-col font-bold text-2xl content-center items-center">
-                      500.000
+                      {penjualanthisday}
                     </div>
                     <div className="">
                       <div className="text-sm text-hijau">+36%</div>
@@ -273,7 +289,7 @@ const Dashboard = () => {
                               startdate,
                               "days"
                             ) < 7 &&
-                            prod.namaPengguna == nama
+                            prod.namaPengguna === nama
                           ) {
                             return (
                               <tr key={i}>
@@ -326,9 +342,12 @@ const Dashboard = () => {
                     <div className="justify-center text-center">
                       Transaksi :{" "}
                       {transaction.map((trans, i) => {
-                        if (trans.label == "Belum Lunas" && trans.namaPengguna == nama) {
+                        if (
+                          trans.label === "Belum Lunas" &&
+                          trans.namaPengguna === nama
+                        ) {
                           i++;
-                          if (i == 1) {
+                          if (i === 1) {
                             return (
                               <div key={i}>
                                 <div className="font-bold">{trans.idtrans}</div>
@@ -341,9 +360,12 @@ const Dashboard = () => {
                     <div className="text-center justify-center">
                       Dokumen :{" "}
                       {dokumen.map((dok, i) => {
-                        if (dok.statusDokumen == "Hutang" && dok.namaPengguna == nama) {
+                        if (
+                          dok.statusDokumen === "Hutang" &&
+                          dok.namaPengguna === nama
+                        ) {
                           i++;
-                          if (i == 1) {
+                          if (i === 1) {
                             return (
                               <div key={dok.id}>
                                 <div className="font-bold">
