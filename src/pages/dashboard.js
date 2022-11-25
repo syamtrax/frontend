@@ -20,6 +20,7 @@ const Dashboard = () => {
   const [token, setToken] = useState("");
   const [expire, setExpire] = useState("");
   var startdate = moment();
+  var yesterday = moment().subtract(1, "days").format("MMM Do YY");
   var date = moment().format("MMM Do YY");
   const navigate = useNavigate();
 
@@ -49,18 +50,30 @@ const Dashboard = () => {
     transaction.createdAt = date.toISOString().substring(0, 10);
   });
 
-  const penjualanthisday = transaction
-    .reduce((total, transaction) => {
-      if (
-        transaction.namaPengguna === nama &&
-        moment(transaction.createdAt).format("MMM Do YY") === date
-      ) {
-        total += transaction.price;
-      }
-      return total;
-    }, 0)
-    .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  const penjualanthisday = transaction.reduce((total, transaction) => {
+    if (
+      transaction.namaPengguna === nama &&
+      moment(transaction.createdAt).format("MMM Do YY") === date
+    ) {
+      total += transaction.price;
+      console.log("today" + total);
+    }
+    return total;
+  }, 0);
+
+  const penjualanyesterday = transaction.reduce((total, transaction) => {
+    if (
+      transaction.namaPengguna === nama &&
+      moment(transaction.createdAt).format("MMM Do YY") === yesterday
+    ) {
+      total += transaction.price;
+      console.log("yesterday" + total);
+    }
+    return total;
+  }, 0);
+
+  const persentase =
+    ((penjualanthisday - penjualanyesterday) / penjualanyesterday) * 100;
 
   const totaldokumen = dokumen.reduce((count, dokumen) => {
     if (dokumen.namaPengguna === nama) {
@@ -98,7 +111,6 @@ const Dashboard = () => {
       "https://sembapp.azurewebsites.net/dokumen"
     );
     setDokumen(response.data);
-    console.log(dokumen);
   };
 
   useEffect(() => {
@@ -117,7 +129,6 @@ const Dashboard = () => {
         },
       }
     );
-    console.log(cookies.accessToken);
     setTransaction(response.data);
   };
   const deleteTransaction = async (id) => {
@@ -177,7 +188,7 @@ const Dashboard = () => {
                       Rp {penjualanthisday}
                     </div>
                     <div className="">
-                      <div className="text-sm text-hijau">+36%</div>
+                      <div className="text-sm text-hijau">{persentase}%</div>
                       <div className="text-xs text-abu">dari kemarin</div>
                     </div>
                   </div>
@@ -309,24 +320,51 @@ const Dashboard = () => {
                       </thead>
                       <tbody>
                         {produk.map((prod, i) => {
-                          if ((
-                            moment(prod.tanggalKedaluwarsa).diff(
+                          if (
+                            (moment(prod.tanggalKedaluwarsa).diff(
                               startdate,
                               "days"
-                            ) < 7 || prod.stokProduk < 5) &&
+                            ) < 7 ||
+                              prod.stokProduk < 5) &&
                             prod.namaPengguna === nama
                           ) {
                             return (
                               <tr key={i}>
                                 <td className="pl-2">{prod.namaProduk}</td>
                                 <td className="text-center">
-                                  {prod.stokProduk < 5 && <div className = "font-bold text-red-600">{prod.stokProduk}</div>}
-                                  {prod.stokProduk >= 5 && <div className = "font-bold">{prod.stokProduk}</div>}
+                                  {prod.stokProduk < 5 && (
+                                    <div className="font-bold text-red-600">
+                                      {prod.stokProduk}
+                                    </div>
+                                  )}
+                                  {prod.stokProduk >= 5 && (
+                                    <div className="font-bold">
+                                      {prod.stokProduk}
+                                    </div>
+                                  )}
                                 </td>
-                                <td className="text-center font-bold text-red-600">
+                                <td className="text-center">
                                   {moment(prod.tanggalKedaluwarsa).diff(
                                     startdate,
                                     "days"
+                                  ) < 7 && (
+                                    <div className="font-bold text-red-600">
+                                      {moment(prod.tanggalKedaluwarsa).diff(
+                                        startdate,
+                                        "days"
+                                      )}
+                                    </div>
+                                  )}
+                                  {moment(prod.tanggalKedaluwarsa).diff(
+                                    startdate,
+                                    "days"
+                                  ) >= 7 && (
+                                    <div className="font-bold">
+                                      {moment(prod.tanggalKedaluwarsa).diff(
+                                        startdate,
+                                        "days"
+                                      )}
+                                    </div>
                                   )}
                                 </td>
                               </tr>
