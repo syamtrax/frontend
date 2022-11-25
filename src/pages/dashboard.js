@@ -309,11 +309,11 @@ const Dashboard = () => {
                       </thead>
                       <tbody>
                         {produk.map((prod, i) => {
-                          if (
+                          if ((
                             moment(prod.tanggalKedaluwarsa).diff(
                               startdate,
                               "days"
-                            ) < 7 || prod.stokProduk < 5 &&
+                            ) < 7 || prod.stokProduk < 5) &&
                             prod.namaPengguna === nama
                           ) {
                             return (
