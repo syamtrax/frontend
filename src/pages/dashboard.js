@@ -364,7 +364,7 @@ const Dashboard = () => {
                     Notifikasi Dokumen
                   </div>
                   {dokumen.length > 0 && (
-                    <div className="h-2/3">
+                    <div className="h-2/3 text-sm">
                       <div className="justify-center text-center">
                         Transaksi :{" "}
                         {transaction.map((trans, i) => {
