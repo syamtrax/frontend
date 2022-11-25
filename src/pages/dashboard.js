@@ -123,7 +123,7 @@ const Dashboard = () => {
   const deleteTransaction = async (id) => {
     try {
       await axios.delete(`https://sembapp.azurewebsites.net/transaction/${id}`);
-      getDocument();
+      getTransaction();
     } catch (error) {
       console.log(error);
     }
