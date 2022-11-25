@@ -20,6 +20,7 @@ const Dashboard = () => {
   const [token, setToken] = useState("");
   const [expire, setExpire] = useState("");
   var startdate = moment();
+  var yesterday = moment().subtract(1, "days").format("MMM Do YY");
   var date = moment().format("MMM Do YY");
   const navigate = useNavigate();
 
@@ -61,6 +62,21 @@ const Dashboard = () => {
     }, 0)
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+  const penjualanyesterday = transaction
+    .reduce((total, transaction) => {
+      if (
+        transaction.namaPengguna === nama &&
+        moment(transaction.createdAt).format("MMM Do YY") === yesterday
+      ) {
+        total += transaction.price;
+      }
+      return total;
+    }, 0)
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+  const persentase = ((penjualanthisday - penjualanyesterday)/penjualanyesterday) * 100
 
   const totaldokumen = dokumen.reduce((count, dokumen) => {
     if (dokumen.namaPengguna === nama) {
@@ -177,7 +193,7 @@ const Dashboard = () => {
                       Rp {penjualanthisday}
                     </div>
                     <div className="">
-                      <div className="text-sm text-hijau">+36%</div>
+                      <div className="text-sm text-hijau">{persentase}%</div>
                       <div className="text-xs text-abu">dari kemarin</div>
                     </div>
                   </div>
