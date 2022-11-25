@@ -61,6 +61,20 @@ const Dashboard = () => {
     }, 0)
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    
+  const totaldokumen = dokumen.reduce((count, dokumen) => {
+    if (dokumen.namaPengguna === nama) {
+      count += 1;
+    }
+    return count;
+  }, 0);
+
+  const totalproduk = produk.reduce((count, produk) => {
+    if (produk.namaPengguna === nama) {
+      count += 1;
+    }
+    return count;
+  }, 0);
 
   const penjualan = transaction
     .reduce((total, transaction) => {
@@ -137,12 +151,12 @@ const Dashboard = () => {
             <div className="flex my-4 gap-6">
               <div className="w-1/2 bg-white shadow-md rounded-md flex h-8">
                 <div className="w-full text-center items-center content-center">
-                  Total Dokumen :{" "}
+                  Total Dokumen : {totaldokumen}
                 </div>
               </div>
               <div className="w-1/2 bg-white shadow-md rounded-md h-8">
                 <div className="w-full text-center items-center content-center">
-                  Jumlah Produk :{" "}
+                  Jumlah Produk : {totalproduk}
                 </div>
               </div>
             </div>
@@ -338,46 +352,50 @@ const Dashboard = () => {
                   <div className="h-1/3 bg-birumuda text-white text-center justify-center items-center flex rounded-t-md font-bold">
                     Notifikasi Dokumen
                   </div>
-                  {dokumen.length > 0 && <div className="h-2/3">
-                    <div className="justify-center text-center">
-                      Transaksi :{" "}
-                      {transaction.map((trans, i) => {
-                        if (
-                          trans.label === "Belum Lunas" &&
-                          trans.namaPengguna === nama
-                        ) {
-                          i++;
-                          if (i === 1) {
-                            return (
-                              <div key={i}>
-                                <div className="font-bold">{trans.idtrans}</div>
-                              </div>
-                            );
-                          }
-                        }
-                      })}{" "}
-                    </div>
-                    <div className="text-center justify-center">
-                      Dokumen :{" "}
-                      {dokumen.map((dok, i) => {
-                        if (
-                          dok.statusDokumen === "Hutang" &&
-                          dok.namaPengguna === nama
-                        ) {
-                          i++;
-                          if (i === 1) {
-                            return (
-                              <div key={dok.id}>
-                                <div className="font-bold">
-                                  {dok.namaDokumen}
+                  {dokumen.length > 0 && (
+                    <div className="h-2/3">
+                      <div className="justify-center text-center">
+                        Transaksi :{" "}
+                        {transaction.map((trans, i) => {
+                          if (
+                            trans.label === "Belum Lunas" &&
+                            trans.namaPengguna === nama
+                          ) {
+                            i++;
+                            if (i === 1) {
+                              return (
+                                <div key={i}>
+                                  <div className="font-bold">
+                                    {trans.idtrans}
+                                  </div>
                                 </div>
-                              </div>
-                            );
+                              );
+                            }
                           }
-                        }
-                      })}
+                        })}{" "}
+                      </div>
+                      <div className="text-center justify-center">
+                        Dokumen :{" "}
+                        {dokumen.map((dok, i) => {
+                          if (
+                            dok.statusDokumen === "Hutang" &&
+                            dok.namaPengguna === nama
+                          ) {
+                            i++;
+                            if (i === 1) {
+                              return (
+                                <div key={dok.id}>
+                                  <div className="font-bold">
+                                    {dok.namaDokumen}
+                                  </div>
+                                </div>
+                              );
+                            }
+                          }
+                        })}
+                      </div>
                     </div>
-                  </div>}
+                  )}
                   {dokumen.length === 0 && (
                     <div className="flex flex-col items-center animate-fade-in-up pb-5">
                       <div role="status">
