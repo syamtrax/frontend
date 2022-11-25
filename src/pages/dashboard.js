@@ -61,7 +61,7 @@ const Dashboard = () => {
     }, 0)
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    
+
   const totaldokumen = dokumen.reduce((count, dokumen) => {
     if (dokumen.namaPengguna === nama) {
       count += 1;
@@ -119,6 +119,14 @@ const Dashboard = () => {
     );
     console.log(cookies.accessToken);
     setTransaction(response.data);
+  };
+  const deleteTransaction = async (id) => {
+    try {
+      await axios.delete(`https://sembapp.azurewebsites.net/transaction/${id}`);
+      getDocument();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -246,8 +254,11 @@ const Dashboard = () => {
                                 </td>
                                 <td className="w-32">{trans.member}</td>
                                 <td className="w-32">
-                                  <button /*</td>onClick={getUsers}*/>
-                                    Button
+                                  <button
+                                    onClick={() => deleteTransaction(trans.id)}
+                                    className="font-bold text-red-700"
+                                  >
+                                    Delete
                                   </button>
                                 </td>
                               </tr>
