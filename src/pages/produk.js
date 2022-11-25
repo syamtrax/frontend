@@ -83,7 +83,7 @@ const Product = () => {
             <div className="flex justify-between gap-6">
               <div className="p-4 h-22 w-full bg-white rounded-md items-center shadow-md text-center text-lg">
                 Notifikasi Kedaluwarsa
-                <div className="text-center">Produk: {produk.map((prod, i)=>{
+                <div className="text-center flex justify-center gap-2">Produk: {produk.map((prod, i)=>{
                   if ((moment(prod.tanggalKedaluwarsa).diff(startdate,'days')) < 7){
                   return(
                     <div key={i}>

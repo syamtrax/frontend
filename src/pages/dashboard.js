@@ -66,6 +66,7 @@ const Dashboard = () => {
   useEffect(() => {
     getTransaction();
     decode();
+    getProduct();
   }, []);
 
   const getTransaction = async () => {
