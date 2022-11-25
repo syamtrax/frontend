@@ -163,10 +163,14 @@ const Product = () => {
                                   {dat.kategoriProduk}
                                 </td>
                                 <td className="w-1/5 text-center">
-                                  {dat.hargaBeli}
+                                  {dat.hargaBeli
+                                    .toString()
+                                    .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                                 </td>
                                 <td className="w-1/5 text-center">
-                                  {dat.hargaJual}
+                                  {dat.hargaJual
+                                    .toString()
+                                    .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                                 </td>
                                 <td className="w-1/5 text-center">
                                   {dat.stokProduk}

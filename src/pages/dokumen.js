@@ -249,7 +249,9 @@ const Document = () => {
                                     )}
                                   </td>
                                   <td className="w-1/5 text-center">
-                                    {dat.jumlah}
+                                    {dat.jumlah
+                                      .toString()
+                                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                                   </td>
                                   <td className="w-1/5 text-center">
                                     {dat.member}
