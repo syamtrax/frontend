@@ -152,7 +152,7 @@ const Dashboard = () => {
                   <div className="">Penjualan Hari Ini</div>
                   <div className="flex justify-between">
                     <div className="flex-col font-bold text-2xl content-center items-center">
-                      {penjualanthisday}
+                      Rp {penjualanthisday}
                     </div>
                     <div className="">
                       <div className="text-sm text-hijau">+36%</div>
