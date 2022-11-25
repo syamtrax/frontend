@@ -8,14 +8,17 @@ import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { Redirect } from "react-router-dom";
+import moment from "moment";
 
 const Dashboard = () => {
+  const [produk, setProduk] = useState([]);
   const [transaction, setTransaction] = useState([]);
   const [cookies, setCookies] = useCookies(["accessToken"]);
   const [nama, setNama] = useState("");
   const [namaToko, setNamaToko] = useState("");
   const [token, setToken] = useState("");
   const [expire, setExpire] = useState("");
+  var startdate = moment();
 
   const navigate = useNavigate();
 
@@ -29,6 +32,12 @@ const Dashboard = () => {
         navigate("/");
       }
     }
+  };
+  const getProduct = async () => {
+    const response = await axios.get("http://localhost:5000/produk");
+    setProduk(response.data);
+    //setProduk(moment(response.data.tanggalKedaluwarsa));
+    console.log(startdate.subtract(moment(produk.tanggalKedaluwarsa)));
   };
 
   transaction.map((trans) => {
@@ -45,6 +54,7 @@ const Dashboard = () => {
     }, 0)
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    
 
   const transaksi = transaction.reduce((count, transaction) => {
     if (transaction.namaPengguna === nama) {
@@ -56,6 +66,7 @@ const Dashboard = () => {
   useEffect(() => {
     getTransaction();
     decode();
+    getProduct();
   }, []);
 
   const getTransaction = async () => {
@@ -168,33 +179,24 @@ const Dashboard = () => {
                   {transaction.length > 0 && (
                     <table className="flex table-fixed justify-center py-2 overflow-y-auto h-80 pb-5">
                       <tbody>
-                        {transaction.map((trans) => {
-                          if (trans.namaPengguna === nama) {
+                        {produk.map((prod, i) => {
+                          if (
+                            moment(prod.tanggalKedaluwarsa).diff(
+                              startdate,
+                              "days"
+                            ) < 7
+                          ) {
                             return (
-                              <tr key={trans.id} className="border-b-2 h-16">
-                                <td className="w-40 text-center">
-                                  {trans.label}
+                              <tr key={i}>
+                                <td className="pl-2">{prod.namaProduk}</td>
+                                <td className="text-center">
+                                  {prod.stokProduk}
                                 </td>
-                                <td className="w-56">
-                                  <div className="font-bold">
-                                    {trans.idtrans}
-                                  </div>
-                                  <div>{trans.paymenttype}</div>
-                                </td>
-                                <td className="w-48">
-                                  <div className="text-lg font-bold">
-                                    Rp{" "}
-                                    {trans.price
-                                      .toString()
-                                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-                                  </div>
-                                  <div>{trans.createdAt}</div>
-                                </td>
-                                <td className="w-32">{trans.member}</td>
-                                <td className="w-32">
-                                  <button /*</td>onClick={getUsers}*/>
-                                    Button
-                                  </button>
+                                <td className="text-center">
+                                  {moment(prod.tanggalKedaluwarsa).diff(
+                                    startdate,
+                                    "days"
+                                  )}
                                 </td>
                               </tr>
                             );

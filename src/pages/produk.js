@@ -7,6 +7,7 @@ import { useCookies } from "react-cookie";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
+import moment from "moment";
 
 const Product = () => {
   const [produk, setProduk] = useState([]);
@@ -14,6 +15,7 @@ const Product = () => {
 
   const [nama, setNama] = useState("");
   const navigate = useNavigate();
+  var startdate = moment();
 
   const decode = async () => {
     try {
@@ -81,7 +83,14 @@ const Product = () => {
             <div className="flex justify-between gap-6">
               <div className="p-4 h-22 w-full bg-white rounded-md items-center shadow-md text-center text-lg">
                 Notifikasi Kedaluwarsa
-                <div className="text-center">Produk:</div>
+                <div className="text-center">Produk: {produk.map((prod, i)=>{
+                  if ((moment(prod.tanggalKedaluwarsa).diff(startdate,'days')) < 7){
+                  return(
+                    <div key={i}>
+                      <div className="">{prod.namaProduk}</div>
+                    </div>
+                  );}   
+                })}</div>
               </div>
               <div className="p-4 h-22 w-full bg-white rounded-md items-center shadow-md text-center text-lg">
                 Notifikasi Habis
