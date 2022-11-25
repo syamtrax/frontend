@@ -56,6 +56,7 @@ const Dashboard = () => {
       moment(transaction.createdAt).format("MMM Do YY") === date
     ) {
       total += transaction.price;
+      console.log("today" + total);
     }
     return total;
   }, 0);
@@ -66,6 +67,7 @@ const Dashboard = () => {
       moment(transaction.createdAt).format("MMM Do YY") === yesterday
     ) {
       total += transaction.price;
+      console.log("yesterday" + total);
     }
     return total;
   }, 0);
@@ -109,7 +111,6 @@ const Dashboard = () => {
       "https://sembapp.azurewebsites.net/dokumen"
     );
     setDokumen(response.data);
-    console.log(dokumen);
   };
 
   useEffect(() => {
@@ -128,7 +129,6 @@ const Dashboard = () => {
         },
       }
     );
-    console.log(cookies.accessToken);
     setTransaction(response.data);
   };
   const deleteTransaction = async (id) => {
