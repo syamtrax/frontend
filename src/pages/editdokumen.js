@@ -73,7 +73,7 @@ function EditDokumen() {
     setJumlah(response.data.jumlah);
     setMember(response.data.member);
     setdeskripsiDokumen(response.data.deskripsiDokumen);
-    setuploadBukti(response.data.uploadBukti);
+    setuploadBukti(response.data.uploadBukti.toString("base64"));
   };
 
   return (
