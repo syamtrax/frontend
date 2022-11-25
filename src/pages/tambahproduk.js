@@ -22,22 +22,10 @@ function TambahProduk() {
   const [namaPengguna, setNama] = useState("");
   const navigate = useNavigate();
 
-  /*const refreshToken = async () => {
-    try {
-      const response = await axios.get("http://localhost:5000/token");
-      const decoded = jwt_decode(response.data.accessToken);
-      setNama(decoded.namaPengguna);
-    } catch (error) {
-      if (error.response) {
-        navigate("/");
-      }
-    }
-  };*/
   const decode = async () => {
     try {
       const decoded = jwt_decode(cookies.accessToken);
       setNama(decoded.namaPengguna);
-      //setNamaToko(decoded.namaToko);
     } catch (error) {
       if (!cookies.accessToken) {
         navigate("/");
@@ -67,7 +55,6 @@ function TambahProduk() {
     }
   };
   useEffect(() => {
-    //refreshToken();
     decode()
   }, []);
 

@@ -19,17 +19,6 @@ function EditDokumen() {
   const [nama, setNama] = useState("");
   const navigate = useNavigate();
 
-  /*const refreshToken = async () => {
-    try {
-      const response = await axios.get("http://localhost:5000/token");
-      const decoded = jwt_decode(response.data.accessToken);
-      setNama(decoded.namaPengguna);
-    } catch (error) {
-      if (error.response) {
-        navigate("/");
-      }
-    }
-  };*/
   const decode = async () => {
     try {
       const decoded = jwt_decode(cookies.accessToken);
@@ -69,7 +58,6 @@ function EditDokumen() {
     setnamaDokumen(response.data.namaDokumen);
     setkategoriDokumen(response.data.kategoriDokumen);
     setdeskripsiDokumen(response.data.deskripsiDokumen);
-    //setuploadBukti(response.data.uploadBukti);
   };
 
   return (

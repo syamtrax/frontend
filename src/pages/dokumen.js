@@ -16,17 +16,6 @@ const Document = () => {
   const navigate = useNavigate();
   const [cookies, setCookies] = useCookies(["accessToken"]);
 
-  /*const refreshToken = async () => {
-    try {
-      const response = await axios.get("http://localhost:5000/token");
-      const decoded = jwt_decode(response.data.accessToken);
-      setNama(decoded.namaPengguna);
-    } catch (error) {
-      if (error.response) {
-        navigate("/");
-      }
-    }
-  };*/
   const decode = async () => {
     try {
       const decoded = jwt_decode(cookies.accessToken);
@@ -41,7 +30,6 @@ const Document = () => {
 
   useEffect(() => {
     getDocument();
-    //refreshToken();
     decode();
     getTransaction();
   }, []);

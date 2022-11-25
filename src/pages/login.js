@@ -11,46 +11,9 @@ const Login = () => {
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
-  //const [checkedUsername, setCheckedUsername] = useState("");
-  //const [checkedPassword, setCheckedPassword] = useState("");
   const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
 
-  /*useEffect(() => {
-    userRef.current.focus();
-  }, []);
-
-  useEffect(() => {
-    setErrMsg('');
-  }, [user, pwd]);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(user, pwd);
-    setUser('');
-    setPwd('');
-    setSuccess(true);
-  }
-
-  const validateUsername = async (username) =>{
-    try {
-      const res = await axios.get(`http://localhost:5000/user/${username}`);
-      console.log(res);
-      if(res.data.length === 0){
-        setErrMsg('Username not found');
-        errRef.current.focus();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-
-  const validatePassword = (password) => {
-    if(password.length < 8){
-      setErrMsg('Password is incorrect');
-      errRef.current.focus();
-    }
-  }
-  }*/
 
   const Authentication = async (e) => {
     e.preventDefault();
