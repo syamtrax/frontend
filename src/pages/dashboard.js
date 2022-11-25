@@ -70,7 +70,7 @@ const Dashboard = () => {
     return total;
   }, 0);
 
-  var persentase =
+  const persentase =
     ((penjualanthisday - penjualanyesterday) / penjualanyesterday) * 100;
 
   const totaldokumen = dokumen.reduce((count, dokumen) => {
