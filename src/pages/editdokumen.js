@@ -115,6 +115,7 @@ function EditDokumen() {
                   value={namaDokumen}
                   onChange={(e) => setnamaDokumen(e.target.value)}
                   placeholder="Masukkan Nama Dokumen"
+                  required
                 />
               </div>
               <div className="flex justify-between gap-3">
@@ -126,11 +127,12 @@ function EditDokumen() {
                     className="border-b-2 w-full p-1 text-gray-500 bg-white"
                     value={kategoriDokumen}
                     onChange={(e) => setkategoriDokumen(e.target.value)}
+                    required
                   >
                     <option value="none">Pilih Kategori Dokumen</option>
                     <option value="Penjualan">Nota Penjualan</option>
                     <option value="Kulakan">Nota Kulakan</option>
-                    <option value="Lain">Lainnya</option>
+                    <option value="Lainnya">Lainnya</option>
                   </select>
                 </div>
                 <div className="flex flex-col w-1/2">
@@ -141,10 +143,12 @@ function EditDokumen() {
                     className="border-b-2 w-full p-1 text-gray-500 bg-white"
                     value={statusDokumen}
                     onChange={(e) => setstatusDokumen(e.target.value)}
+                    required
                   >
                     <option value="none">Pilih Status</option>
                     <option value="Lunas">Lunas</option>
                     <option value="Hutang">Hutang</option>
+                    <option value="-">-</option>
                   </select>
                 </div>
               </div>
@@ -157,10 +161,12 @@ function EditDokumen() {
                     className="border-b-2 w-full p-1 text-gray-500 bg-white"
                     value={metodePembayaran}
                     onChange={(e) => setmetodePembayaran(e.target.value)}
+                    required
                   >
                     <option value="none">Pilih Metode Pembayaran</option>
                     <option value="Tunai">Tunai</option>
                     <option value="Non-Tunai">Non-Tunai</option>
+                    <option value="-">-</option>
                   </select>
                 </div>
                 <div className="flex flex-col w-1/2">
@@ -173,6 +179,7 @@ function EditDokumen() {
                     value={tglTransaksi}
                     onChange={(e) => settglTransaksi(e.target.value)}
                     placeholder="Masukkan Tanggal Transaksi"
+                    // required
                   />
                 </div>
               </div>
@@ -187,6 +194,7 @@ function EditDokumen() {
                     value={jumlah}
                     onChange={(e) => setJumlah(e.target.value)}
                     placeholder="Masukkan Jumlah Transaksi"
+                    required
                   />
                 </div>
                 <div className="flex flex-col w-1/2">
@@ -197,10 +205,12 @@ function EditDokumen() {
                     className="border-b-2 w-full p-1 text-gray-500 bg-white"
                     value={member}
                     onChange={(e) => setMember(e.target.value)}
+                    required
                   >
                     <option value="none">Apakah member?</option>
                     <option value="Member">Member</option>
                     <option value="Non-Member">Non-Member</option>
+                    <option value="-">-</option>
                   </select>
                 </div>
               </div>

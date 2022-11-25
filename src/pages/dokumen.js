@@ -231,10 +231,10 @@ const Document = () => {
                                   key={dat.id}
                                   className="py-8 border-b-2 border-gray-300"
                                 >
-                                  <td className="w-1/5 text-center">
+                                  <td className="w-1/5 text-start">
                                     {dat.namaDokumen}
                                   </td>
-                                  <td className="w-1/5">
+                                  <td className="w-1/5 text-center">
                                     {dat.kategoriDokumen}
                                   </td>
                                   <td className="w-1/5 text-center">

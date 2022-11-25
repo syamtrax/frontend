@@ -100,6 +100,7 @@ function TambahDokumen() {
                   value={namaDokumen}
                   onChange={(e) => setnamaDokumen(e.target.value)}
                   placeholder="Masukkan Nama Dokumen"
+                  required
                 />
               </div>
               <div className="flex justify-between gap-3">
@@ -132,6 +133,7 @@ function TambahDokumen() {
                     <option value="none">Pilih Status</option>
                     <option value="Lunas">Lunas</option>
                     <option value="Hutang">Hutang</option>
+                    <option value="-">-</option>
                   </select>
                 </div>
               </div>
@@ -149,6 +151,7 @@ function TambahDokumen() {
                     <option value="none">Pilih Metode Pembayaran</option>
                     <option value="Tunai">Tunai</option>
                     <option value="Non-Tunai">Non-Tunai</option>
+                    <option value="-">-</option>
                   </select>
                 </div>
                 <div className="flex flex-col w-1/2">
@@ -192,6 +195,7 @@ function TambahDokumen() {
                     <option value="none">Apakah member?</option>
                     <option value="Member">Member</option>
                     <option value="Non-Member">Non-Member</option>
+                    <option value="-">-</option>
                   </select>
                 </div>
               </div>
