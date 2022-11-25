@@ -309,24 +309,51 @@ const Dashboard = () => {
                       </thead>
                       <tbody>
                         {produk.map((prod, i) => {
-                          if ((
-                            moment(prod.tanggalKedaluwarsa).diff(
+                          if (
+                            (moment(prod.tanggalKedaluwarsa).diff(
                               startdate,
                               "days"
-                            ) < 7 || prod.stokProduk < 5) &&
+                            ) < 7 ||
+                              prod.stokProduk < 5) &&
                             prod.namaPengguna === nama
                           ) {
                             return (
                               <tr key={i}>
                                 <td className="pl-2">{prod.namaProduk}</td>
                                 <td className="text-center">
-                                  {prod.stokProduk < 5 && <div className = "font-bold text-red-600">{prod.stokProduk}</div>}
-                                  {prod.stokProduk >= 5 && <div className = "font-bold">{prod.stokProduk}</div>}
+                                  {prod.stokProduk < 5 && (
+                                    <div className="font-bold text-red-600">
+                                      {prod.stokProduk}
+                                    </div>
+                                  )}
+                                  {prod.stokProduk >= 5 && (
+                                    <div className="font-bold">
+                                      {prod.stokProduk}
+                                    </div>
+                                  )}
                                 </td>
-                                <td className="text-center font-bold text-red-600">
+                                <td className="text-center">
                                   {moment(prod.tanggalKedaluwarsa).diff(
                                     startdate,
                                     "days"
+                                  ) < 7 && (
+                                    <div className="font-bold text-red-600">
+                                      {moment(prod.tanggalKedaluwarsa).diff(
+                                        startdate,
+                                        "days"
+                                      )}
+                                    </div>
+                                  )}
+                                  {moment(prod.tanggalKedaluwarsa).diff(
+                                    startdate,
+                                    "days"
+                                  ) >= 7 && (
+                                    <div className="font-bold">
+                                      {moment(prod.tanggalKedaluwarsa).diff(
+                                        startdate,
+                                        "days"
+                                      )}
+                                    </div>
                                   )}
                                 </td>
                               </tr>
