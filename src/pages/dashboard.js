@@ -338,7 +338,7 @@ const Dashboard = () => {
                   <div className="h-1/3 bg-birumuda text-white text-center justify-center items-center flex rounded-t-md font-bold">
                     Notifikasi Dokumen
                   </div>
-                  {dokumen.length && transaction.length > 0 && <div className="h-2/3">
+                  {dokumen.length > 0 && <div className="h-2/3">
                     <div className="justify-center text-center">
                       Transaksi :{" "}
                       {transaction.map((trans, i) => {
@@ -378,7 +378,7 @@ const Dashboard = () => {
                       })}
                     </div>
                   </div>}
-                  {dokumen.length && transaction.length === 0 && (
+                  {dokumen.length === 0 && (
                     <div className="flex flex-col items-center animate-fade-in-up pb-5">
                       <div role="status">
                         <svg
