@@ -103,7 +103,7 @@ function Daftar() {
                     onChange={(e) => setKonfsandi(e.target.value)}
                     placeholder="Masukkan Ulang Kata Sandi"
                   />
-                  {isError && <p className="text-danger">{isError}</p>}
+                  {/*isError && <p className="text-danger">{isError}</p>*/}
                 </div>
                 <div>
                   <label
