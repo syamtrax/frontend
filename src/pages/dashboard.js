@@ -248,7 +248,7 @@ const Dashboard = () => {
                                   </div>
                                   <div>
                                     {moment(trans.createdAt).format(
-                                      "MMMM Do YYYY, h:mm:ss a"
+                                      "Do MMMM YYYY, h:mm:ss a"
                                     )}
                                   </div>
                                 </td>
@@ -313,16 +313,17 @@ const Dashboard = () => {
                             moment(prod.tanggalKedaluwarsa).diff(
                               startdate,
                               "days"
-                            ) < 7 &&
+                            ) < 7 || prod.stokProduk < 5 &&
                             prod.namaPengguna === nama
                           ) {
                             return (
                               <tr key={i}>
                                 <td className="pl-2">{prod.namaProduk}</td>
                                 <td className="text-center">
-                                  {prod.stokProduk}
+                                  {prod.stokProduk < 5 && <div className = "font-bold text-red-600">{prod.stokProduk}</div>}
+                                  {prod.stokProduk >= 5 && <div className = "font-bold">{prod.stokProduk}</div>}
                                 </td>
-                                <td className="text-center">
+                                <td className="text-center font-bold text-red-600">
                                   {moment(prod.tanggalKedaluwarsa).diff(
                                     startdate,
                                     "days"
@@ -361,7 +362,7 @@ const Dashboard = () => {
                 </div>
                 <div className="bg-white h-1/3 shadow-md rounded-md">
                   <div className="h-1/3 bg-birumuda text-white text-center justify-center items-center flex rounded-t-md font-bold">
-                    Notifikasi Dokumen
+                    Notifikasi Hutang
                   </div>
                   {dokumen.length > 0 && (
                     <div className="h-2/3 text-sm">
@@ -376,7 +377,7 @@ const Dashboard = () => {
                             if (i === 1) {
                               return (
                                 <div key={i}>
-                                  <div className="font-bold">
+                                  <div className="font-bold text-red-600">
                                     {trans.idtrans}
                                   </div>
                                 </div>
@@ -396,7 +397,7 @@ const Dashboard = () => {
                             if (i === 1) {
                               return (
                                 <div key={dok.id}>
-                                  <div className="font-bold">
+                                  <div className="font-bold text-red-600">
                                     {dok.namaDokumen}
                                   </div>
                                 </div>
