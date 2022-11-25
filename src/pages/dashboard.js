@@ -33,6 +33,7 @@ const Dashboard = () => {
       }
     }
   };
+
   const getProduct = async () => {
     const response = await axios.get("http://localhost:5000/produk");
     setProduk(response.data);
@@ -54,7 +55,6 @@ const Dashboard = () => {
     }, 0)
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    
 
   const transaksi = transaction.reduce((count, transaction) => {
     if (transaction.namaPengguna === nama) {
@@ -66,7 +66,6 @@ const Dashboard = () => {
   useEffect(() => {
     getTransaction();
     decode();
-    getProduct();
   }, []);
 
   const getTransaction = async () => {
@@ -179,24 +178,33 @@ const Dashboard = () => {
                   {transaction.length > 0 && (
                     <table className="flex table-fixed justify-center py-2 overflow-y-auto h-80 pb-5">
                       <tbody>
-                        {produk.map((prod, i) => {
-                          if (
-                            moment(prod.tanggalKedaluwarsa).diff(
-                              startdate,
-                              "days"
-                            ) < 7
-                          ) {
+                        {transaction.map((trans) => {
+                          if (trans.namaPengguna === nama) {
                             return (
-                              <tr key={i}>
-                                <td className="pl-2">{prod.namaProduk}</td>
-                                <td className="text-center">
-                                  {prod.stokProduk}
+                              <tr key={trans.id} className="border-b-2 h-16">
+                                <td className="w-40 text-center">
+                                  {trans.label}
                                 </td>
-                                <td className="text-center">
-                                  {moment(prod.tanggalKedaluwarsa).diff(
-                                    startdate,
-                                    "days"
-                                  )}
+                                <td className="w-56">
+                                  <div className="font-bold">
+                                    {trans.idtrans}
+                                  </div>
+                                  <div>{trans.paymenttype}</div>
+                                </td>
+                                <td className="w-48">
+                                  <div className="text-lg font-bold">
+                                    Rp{" "}
+                                    {trans.price
+                                      .toString()
+                                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                                  </div>
+                                  <div>{trans.createdAt}</div>
+                                </td>
+                                <td className="w-32">{trans.member}</td>
+                                <td className="w-32">
+                                  <button /*</td>onClick={getUsers}*/>
+                                    Button
+                                  </button>
                                 </td>
                               </tr>
                             );
@@ -244,11 +252,27 @@ const Dashboard = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
+                      {produk.map((prod, i) => {
+                        if (
+                          moment(prod.tanggalKedaluwarsa).diff(
+                            startdate,
+                            "days"
+                          ) < 7
+                        ) {
+                          return (
+                            <tr key={i}>
+                              <td className="pl-2">{prod.namaProduk}</td>
+                              <td className="text-center">{prod.stokProduk}</td>
+                              <td className="text-center">
+                                {moment(prod.tanggalKedaluwarsa).diff(
+                                  startdate,
+                                  "days"
+                                )}
+                              </td>
+                            </tr>
+                          );
+                        }
+                      })}
                     </tbody>
                   </table>
                 </div>
