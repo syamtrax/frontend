@@ -244,7 +244,7 @@ const Dashboard = () => {
                   <div className="h-1/4 bg-birumuda text-white text-center justify-center items-center flex rounded-t-md font-bold">
                     Notifikasi Produk
                   </div>
-                  <table className="flex table-fixed justify-center py-2">
+                  <table className="table-fixed justify-center py-2">
                     <thead>
                       <tr>
                         <th className="w-24 flex justify-start pl-2">Nama</th>
