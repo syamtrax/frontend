@@ -73,6 +73,7 @@ function EditProduk() {
     setsatuanProduk(response.data.satuanProduk);
     settanggalKedaluwarsa(response.data.tanggalKedaluwarsa);
   };
+  console.log(tanggalKedaluwarsa);
 
   return (
     <div className="flex bg-abumuda w-full h-screen justify-center font-inter">

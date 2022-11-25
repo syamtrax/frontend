@@ -75,6 +75,7 @@ function EditDokumen() {
     setdeskripsiDokumen(response.data.deskripsiDokumen);
     //setuploadBukti(response.data.uploadBukti);
   };
+  console.log(tglTransaksi);
 
   return (
     <div className="flex bg-abumuda w-full h-screen justify-center font-inter">
