@@ -50,33 +50,28 @@ const Dashboard = () => {
     transaction.createdAt = date.toISOString().substring(0, 10);
   });
 
-  const penjualanthisday = transaction
-    .reduce((total, transaction) => {
-      if (
-        transaction.namaPengguna === nama &&
-        moment(transaction.createdAt).format("MMM Do YY") === date
-      ) {
-        total += transaction.price;
-      }
-      return total;
-    }, 0)
-    .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  const penjualanthisday = transaction.reduce((total, transaction) => {
+    if (
+      transaction.namaPengguna === nama &&
+      moment(transaction.createdAt).format("MMM Do YY") === date
+    ) {
+      total += transaction.price;
+    }
+    return total;
+  }, 0);
 
-  const penjualanyesterday = transaction
-    .reduce((total, transaction) => {
-      if (
-        transaction.namaPengguna === nama &&
-        moment(transaction.createdAt).format("MMM Do YY") === yesterday
-      ) {
-        total += transaction.price;
-      }
-      return total;
-    }, 0)
-    .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  const penjualanyesterday = transaction.reduce((total, transaction) => {
+    if (
+      transaction.namaPengguna === nama &&
+      moment(transaction.createdAt).format("MMM Do YY") === yesterday
+    ) {
+      total += transaction.price;
+    }
+    return total;
+  }, 0);
 
-  var persentase = ((penjualanthisday - penjualanyesterday)/penjualanyesterday) * 100
+  var persentase =
+    ((penjualanthisday - penjualanyesterday) / penjualanyesterday) * 100;
 
   const totaldokumen = dokumen.reduce((count, dokumen) => {
     if (dokumen.namaPengguna === nama) {
