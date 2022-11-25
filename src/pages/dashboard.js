@@ -326,7 +326,7 @@ const Dashboard = () => {
                     <div className="justify-center text-center">
                       Transaksi :{" "}
                       {transaction.map((trans, i) => {
-                        if (trans.label == "Belum Lunas") {
+                        if (trans.label == "Belum Lunas" && trans.namaPengguna == nama) {
                           i++;
                           if (i == 1) {
                             return (
@@ -341,7 +341,7 @@ const Dashboard = () => {
                     <div className="text-center justify-center">
                       Dokumen :{" "}
                       {dokumen.map((dok, i) => {
-                        if (dok.statusDokumen == "Hutang") {
+                        if (dok.statusDokumen == "Hutang" && dok.namaPengguna == nama) {
                           i++;
                           if (i == 1) {
                             return (
