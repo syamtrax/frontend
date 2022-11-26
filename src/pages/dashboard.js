@@ -412,13 +412,12 @@ const Dashboard = () => {
                       <div className="justify-center text-center">
                         Transaksi :{" "}
                         {transaction.map((trans, i) => {
-                          const x = 0;
                           if (
                             trans.label === "Belum Lunas" &&
                             trans.namaPengguna === nama
                           ) {
-                            x++;
-                            if (x === 1) {
+                            i++;
+                            if (i === 1) {
                               return (
                                 <div key={i}>
                                   <div className="font-bold text-red-600">
@@ -433,13 +432,12 @@ const Dashboard = () => {
                       <div className="text-center justify-center">
                         Dokumen :{" "}
                         {dokumen.map((dok, i) => {
-                          const x = 0;
                           if (
                             dok.statusDokumen === "Hutang" &&
                             dok.namaPengguna === nama
                           ) {
-                            x++;
-                            if (x === 1) {
+                            i++;
+                            if (i === 1) {
                               return (
                                 <div key={i}>
                                   <div className="font-bold text-red-600">
