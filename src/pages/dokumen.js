@@ -20,7 +20,6 @@ const Document = () => {
     try {
       const decoded = jwt_decode(cookies.accessToken);
       setNama(decoded.namaPengguna);
-      //setNamaToko(decoded.namaToko);
     } catch (error) {
       if (!cookies.accessToken) {
         navigate("/");
@@ -52,7 +51,6 @@ const Document = () => {
       "https://sembapp.azurewebsites.net/transaction"
     );
     setDataTrans(response.data);
-    console.log(dataTrans);
     setDokumen((prevState) => [
       ...prevState,
       {

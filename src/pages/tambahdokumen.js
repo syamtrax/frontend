@@ -17,7 +17,7 @@ function TambahDokumen() {
   const [member, setMember] = useState("");
   const [deskripsiDokumen, setdeskripsiDokumen] = useState("");
   const [uploadBukti, setuploadBukti] = useState(null);
-  const [cookies, setCookies] = useCookies(["accessToken"]);
+  const [cookies] = useCookies(["accessToken"]);
   const [msg, setMsg] = useState("");
   const [namaPengguna, setNama] = useState("");
   const navigate = useNavigate();

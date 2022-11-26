@@ -8,7 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 const Navbar = () => {
-  const [cookies, setCookies, removeCookie] = useCookies(["accessToken"]);
+  const [cookies, removeCookie] = useCookies(["accessToken"]);
   const navigate = useNavigate();
   const Logout = async () => {
     try {
@@ -42,8 +42,8 @@ const Navbar = () => {
             <Link to="/dokumen">
               <div className="px-5 bg-white hover:font-bold">Dokumen</div>
             </Link>
-            <div className="px-5 bg-white hover:font-bold">Transaksi</div>
-            <div className="px-5 bg-white hover:font-bold">Keuangan</div>
+            {/*<div className="px-5 bg-white hover:font-bold">Transaksi</div>
+            <div className="px-5 bg-white hover:font-bold">Keuangan</div>*/}
           </div>
         </div>
         <div className="flex text-base text-center items-center gap-4">

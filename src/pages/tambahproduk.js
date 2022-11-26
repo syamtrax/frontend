@@ -11,7 +11,7 @@ function TambahProduk() {
   const [kodeProduk, setkodeProduk] = useState("");
   const [namaProduk, setnamaProduk] = useState("");
   const [kategoriProduk, setkategoriProduk] = useState("");
-  const [cookies, setCookies] = useCookies(["accessToken"]);
+  const [cookies] = useCookies(["accessToken"]);
   const [hargaBeli, sethargaBeli] = useState(0);
   const [hargaJual, sethargaJual] = useState(0);
   const [stokProduk, setstokProduk] = useState(0);

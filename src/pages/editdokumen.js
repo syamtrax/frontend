@@ -17,7 +17,7 @@ function EditDokumen() {
   const [member, setMember] = useState("");
   const [deskripsiDokumen, setdeskripsiDokumen] = useState("");
   const [uploadBukti, setuploadBukti] = useState(null);
-  const [cookies, setCookies] = useCookies(["accessToken"]);
+  const [cookies] = useCookies(["accessToken"]);
   const [msg, setMsg] = useState("");
   const { id } = useParams();
   const [nama, setNama] = useState("");

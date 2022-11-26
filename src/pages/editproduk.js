@@ -8,7 +8,7 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 
 function EditProduk() {
-  const [cookies, setCookie] = useCookies(["accessToken"]);
+  const [cookies] = useCookies(["accessToken"]);
   const [kodeProduk, setkodeProduk] = useState("");
   const [namaProduk, setnamaProduk] = useState("");
   const [kategoriProduk, setkategoriProduk] = useState("");
@@ -73,7 +73,6 @@ function EditProduk() {
     setsatuanProduk(response.data.satuanProduk);
     settanggalKedaluwarsa(response.data.tanggalKedaluwarsa);
   };
-  console.log(tanggalKedaluwarsa);
 
   return (
     <div className="flex bg-abumuda w-full h-screen justify-center font-inter">

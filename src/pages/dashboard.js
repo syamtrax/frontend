@@ -7,18 +7,15 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { Redirect } from "react-router-dom";
 import moment from "moment";
 
 const Dashboard = () => {
   const [dokumen, setDokumen] = useState([]);
   const [produk, setProduk] = useState([]);
   const [transaction, setTransaction] = useState([]);
-  const [cookies, setCookies] = useCookies(["accessToken"]);
+  const [cookies] = useCookies(["accessToken"]);
   const [nama, setNama] = useState("");
   const [namaToko, setNamaToko] = useState("");
-  const [token, setToken] = useState("");
-  const [expire, setExpire] = useState("");
   var startdate = moment();
   var yesterday = moment().subtract(1, "days").format("MMM Do YY");
   var date = moment().format("MMM Do YY");
@@ -41,13 +38,7 @@ const Dashboard = () => {
       "https://sembapp.azurewebsites.net/produk"
     );
     setProduk(response.data);
-    console.log(startdate.subtract(moment(produk.tanggalKedaluwarsa)));
   };
-
-  transaction.map((trans) => {
-    const date = new Date(trans.createdAt);
-    transaction.createdAt = date.toISOString().substring(0, 10);
-  });
 
   const penjualanthisday = transaction.reduce((total, transaction) => {
     if (
@@ -86,6 +77,13 @@ const Dashboard = () => {
     return count;
   }, 0);
 
+  const transaksi = transaction.reduce((count, transaction) => {
+    if (transaction.namaPengguna === nama) {
+      count += 1;
+    }
+    return count;
+  }, 0);
+
   const penjualan = transaction
     .reduce((total, transaction) => {
       if (transaction.namaPengguna === nama) {
@@ -95,13 +93,6 @@ const Dashboard = () => {
     }, 0)
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-
-  const transaksi = transaction.reduce((count, transaction) => {
-    if (transaction.namaPengguna === nama) {
-      count += 1;
-    }
-    return count;
-  }, 0);
 
   const getDocument = async () => {
     const response = await axios.get(
@@ -188,8 +179,22 @@ const Dashboard = () => {
                         .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                     </div>
                     <div className="">
-                      <div className="text-sm text-hijau">{persentase}%</div>
-                      <div className="text-xs text-abu">dari kemarin</div>
+                      {persentase > 0 && (
+                        <>
+                          <div className="text-sm text-hijau">
+                            {persentase.toFixed(2)}%
+                          </div>
+                          <div className="text-xs text-abu">dari kemarin</div>
+                        </>
+                      )}
+                      {persentase <= 0 && (
+                        <>
+                          <div className="text-sm text-red-600">
+                            {persentase.toFixed(2)}%
+                          </div>
+                          <div className="text-xs text-abu">dari kemarin</div>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -407,12 +412,13 @@ const Dashboard = () => {
                       <div className="justify-center text-center">
                         Transaksi :{" "}
                         {transaction.map((trans, i) => {
+                          const x = 0;
                           if (
                             trans.label === "Belum Lunas" &&
                             trans.namaPengguna === nama
                           ) {
-                            i++;
-                            if (i === 1) {
+                            x++;
+                            if (x === 1) {
                               return (
                                 <div key={i}>
                                   <div className="font-bold text-red-600">
@@ -427,14 +433,15 @@ const Dashboard = () => {
                       <div className="text-center justify-center">
                         Dokumen :{" "}
                         {dokumen.map((dok, i) => {
+                          const x = 0;
                           if (
                             dok.statusDokumen === "Hutang" &&
                             dok.namaPengguna === nama
                           ) {
-                            i++;
-                            if (i === 1) {
+                            x++;
+                            if (x === 1) {
                               return (
-                                <div key={dok.id}>
+                                <div key={i}>
                                   <div className="font-bold text-red-600">
                                     {dok.namaDokumen}
                                   </div>

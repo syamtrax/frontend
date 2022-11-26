@@ -11,7 +11,7 @@ import moment from "moment";
 
 const Product = () => {
   const [produk, setProduk] = useState([]);
-  const [cookies, setCookies] = useCookies(["accessToken"]);
+  const [cookies] = useCookies(["accessToken"]);
   const [nama, setNama] = useState("");
   const navigate = useNavigate();
   var startdate = moment();
