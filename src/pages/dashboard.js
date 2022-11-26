@@ -41,7 +41,6 @@ const Dashboard = () => {
       "https://sembapp.azurewebsites.net/produk"
     );
     setProduk(response.data);
-    //setProduk(moment(response.data.tanggalKedaluwarsa));
     console.log(startdate.subtract(moment(produk.tanggalKedaluwarsa)));
   };
 
@@ -56,7 +55,6 @@ const Dashboard = () => {
       moment(transaction.createdAt).format("MMM Do YY") === date
     ) {
       total += transaction.price;
-      console.log("today" + total);
     }
     return total;
   }, 0);
@@ -67,7 +65,6 @@ const Dashboard = () => {
       moment(transaction.createdAt).format("MMM Do YY") === yesterday
     ) {
       total1 += transaction.price;
-      console.log("yesterday" + total1);
     }
     return total1;
   }, 0);
@@ -185,7 +182,10 @@ const Dashboard = () => {
                   <div className="">Penjualan Hari Ini</div>
                   <div className="flex justify-between">
                     <div className="flex-col font-bold text-2xl content-center items-center">
-                      Rp {penjualanthisday}
+                      Rp{" "}
+                      {penjualanthisday
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                     </div>
                     <div className="">
                       <div className="text-sm text-hijau">{persentase}%</div>

@@ -27,6 +27,13 @@ const Product = () => {
     }
   };
 
+  const totalproduk = produk.reduce((count, produk) => {
+    if (produk.namaPengguna === nama) {
+      count += 1;
+    }
+    return count;
+  }, 0);
+
   useEffect(() => {
     getProduct();
     decode();
@@ -76,7 +83,7 @@ const Product = () => {
               </Link>
               <div className="w-1/3 bg-white shadow-md rounded-md h-8">
                 <div className="w-full p-1 text-center items-center content-center">
-                  Jumlah Produk : {produk.length}
+                  Jumlah Produk : {totalproduk}
                 </div>
               </div>
             </div>

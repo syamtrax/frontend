@@ -34,6 +34,13 @@ const Document = () => {
     getTransaction();
   }, []);
 
+  const totaldokumen = dokumen.reduce((count, dokumen) => {
+    if (dokumen.namaPengguna === nama) {
+      count += 1;
+    }
+    return count;
+  }, 0);
+
   const getDocument = async () => {
     const response = await axios.get(
       "https://sembapp.azurewebsites.net/dokumen"
@@ -96,7 +103,7 @@ const Document = () => {
               </Link>
               <div className="w-1/3 bg-white shadow-md rounded-md h-8">
                 <div className="w-full p-1 text-center items-center content-center">
-                  Total Dokumen :
+                  Total Dokumen : {totaldokumen}
                 </div>
               </div>
             </div>
