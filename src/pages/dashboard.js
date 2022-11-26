@@ -61,15 +61,15 @@ const Dashboard = () => {
     return total;
   }, 0);
 
-  const penjualanyesterday = transaction.reduce((total, transaction) => {
+  const penjualanyesterday = transaction.reduce((total1, transaction) => {
     if (
       transaction.namaPengguna === nama &&
       moment(transaction.createdAt).format("MMM Do YY") === yesterday
     ) {
-      total += transaction.price;
-      console.log("yesterday" + total);
+      total1 += transaction.price;
+      console.log("yesterday" + total1);
     }
-    return total;
+    return total1;
   }, 0);
 
   const persentase =
