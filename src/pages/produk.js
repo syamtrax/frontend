@@ -100,7 +100,7 @@ const Product = () => {
                     ) {
                       return (
                         <div key={i}>
-                          <div className="">{prod.namaProduk}, </div>
+                          <div className="font-bold">{prod.namaProduk}, </div>
                         </div>
                       );
                     }

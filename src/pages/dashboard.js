@@ -157,12 +157,12 @@ const Dashboard = () => {
             </div>
             <div className="flex my-4 gap-6">
               <div className="w-1/2 bg-white shadow-md rounded-md flex h-8">
-                <div className="w-full text-center items-center content-center">
+                <div className="w-full p-1 text-center items-center content-center">
                   Total Dokumen : {totaldokumen}
                 </div>
               </div>
               <div className="w-1/2 bg-white shadow-md rounded-md h-8">
-                <div className="w-full text-center items-center content-center">
+                <div className="w-full p-1 text-center items-center content-center">
                   Jumlah Produk : {totalproduk}
                 </div>
               </div>
@@ -204,10 +204,6 @@ const Dashboard = () => {
                     <div className="flex-col font-bold text-2xl content-center items-center">
                       Rp {penjualan}
                     </div>
-                    <div className="">
-                      <div className="text-sm text-hijau">+36%</div>
-                      <div className="text-xs text-abu">dari kemarin</div>
-                    </div>
                   </div>
                 </div>
                 <div className="p-4 bg-white rounded-md items-center shadow-md">
@@ -215,10 +211,6 @@ const Dashboard = () => {
                   <div className="flex justify-between">
                     <div className="flex-col font-bold text-2xl content-center items-center">
                       {transaksi} kali
-                    </div>
-                    <div className="">
-                      <div className="text-sm text-hijau">+36%</div>
-                      <div className="text-xs text-abu">dari kemarin</div>
                     </div>
                   </div>
                 </div>
