@@ -35,17 +35,20 @@ function TambahProduk() {
   const saveProduk = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://sembapp.azurewebsites.net/produk", {
-        kodeProduk,
-        namaProduk,
-        kategoriProduk,
-        hargaBeli,
-        hargaJual,
-        stokProduk,
-        satuanProduk,
-        tanggalKedaluwarsa,
-        namaPengguna,
-      });
+      await axios.post(
+        "http://ec2-35-153-232-122.compute-1.amazonaws.com:5000/produk",
+        {
+          kodeProduk,
+          namaProduk,
+          kategoriProduk,
+          hargaBeli,
+          hargaJual,
+          stokProduk,
+          satuanProduk,
+          tanggalKedaluwarsa,
+          namaPengguna,
+        }
+      );
       navigate("/produk");
     } catch (error) {
       if (error.response) {

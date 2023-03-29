@@ -16,7 +16,7 @@ function Daftar() {
   const saveUser = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://sembapp.azurewebsites.net/user", {
+      await axios.post("http://ec2-35-153-232-122.compute-1.amazonaws.com:5000/user", {
         namaPengguna,
         sandi,
         telp,
