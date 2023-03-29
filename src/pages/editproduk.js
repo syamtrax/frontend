@@ -26,7 +26,7 @@ function EditProduk() {
   const saveProduk = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(`http://ec2-35-153-232-122.compute-1.amazonaws.com:5000/produk/${id}`, {
+      await axios.patch(`http://ec2-34-194-13-113.compute-1.amazonaws.com:5000/produk/${id}`, {
         kodeProduk,
         namaProduk,
         kategoriProduk,
@@ -62,7 +62,7 @@ function EditProduk() {
 
   const getProductById = async () => {
     const response = await axios.get(
-      `http://ec2-35-153-232-122.compute-1.amazonaws.com:5000/produk/${id}}`
+      `http://ec2-34-194-13-113.compute-1.amazonaws.com:5000/produk/${id}}`
     );
     setkodeProduk(response.data.kodeProduk);
     setnamaProduk(response.data.namaProduk);

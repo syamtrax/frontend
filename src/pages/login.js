@@ -18,7 +18,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://ec2-35-153-232-122.compute-1.amazonaws.com:5000/login",
+        "http://ec2-34-194-13-113.compute-1.amazonaws.com:5000/login",
         {
           user,
           pwd,

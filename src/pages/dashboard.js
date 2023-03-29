@@ -35,7 +35,7 @@ const Dashboard = () => {
 
   const getProduct = async () => {
     const response = await axios.get(
-      "http://ec2-35-153-232-122.compute-1.amazonaws.com:5000/produk"
+      "http://ec2-34-194-13-113.compute-1.amazonaws.com:5000/produk"
     );
     setProduk(response.data);
   };
@@ -96,7 +96,7 @@ const Dashboard = () => {
 
   const getDocument = async () => {
     const response = await axios.get(
-      "http://ec2-35-153-232-122.compute-1.amazonaws.com:5000/dokumen"
+      "http://ec2-34-194-13-113.compute-1.amazonaws.com:5000/dokumen"
     );
     setDokumen(response.data);
   };
@@ -110,7 +110,7 @@ const Dashboard = () => {
 
   const getTransaction = async () => {
     const response = await axios.get(
-      "http://ec2-35-153-232-122.compute-1.amazonaws.com:5000/transaction",
+      "http://ec2-34-194-13-113.compute-1.amazonaws.com:5000/transaction",
       {
         headers: {
           authorization: `Bearer ${cookies.accessToken}`,
@@ -121,7 +121,7 @@ const Dashboard = () => {
   };
   const deleteTransaction = async (id) => {
     try {
-      await axios.delete(`http://ec2-35-153-232-122.compute-1.amazonaws.com:5000/transaction/${id}`);
+      await axios.delete(`http://ec2-34-194-13-113.compute-1.amazonaws.com:5000/transaction/${id}`);
       getTransaction();
     } catch (error) {
       console.log(error);

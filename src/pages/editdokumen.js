@@ -37,7 +37,7 @@ function EditDokumen() {
   const saveDokumen = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(`http://ec2-35-153-232-122.compute-1.amazonaws.com:5000/dokumen/${id}`, {
+      await axios.patch(`http://ec2-34-194-13-113.compute-1.amazonaws.com:5000/dokumen/${id}`, {
         namaDokumen,
         kategoriDokumen,
         statusDokumen,
@@ -63,7 +63,7 @@ function EditDokumen() {
 
   const getDocumentById = async () => {
     const response = await axios.get(
-      `http://ec2-35-153-232-122.compute-1.amazonaws.com:5000/dokumen/${id}}`
+      `http://ec2-34-194-13-113.compute-1.amazonaws.com:5000/dokumen/${id}}`
     );
     setnamaDokumen(response.data.namaDokumen);
     setkategoriDokumen(response.data.kategoriDokumen);

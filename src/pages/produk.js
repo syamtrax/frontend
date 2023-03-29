@@ -41,14 +41,14 @@ const Product = () => {
 
   const getProduct = async () => {
     const response = await axios.get(
-      "http://ec2-35-153-232-122.compute-1.amazonaws.com:5000/produk"
+      "http://ec2-34-194-13-113.compute-1.amazonaws.com:5000/produk"
     );
     setProduk(response.data);
   };
 
   const deleteProduct = async (id) => {
     try {
-      await axios.delete(`http://ec2-35-153-232-122.compute-1.amazonaws.com:5000/produk/${id}`);
+      await axios.delete(`http://ec2-34-194-13-113.compute-1.amazonaws.com:5000/produk/${id}`);
       getProduct();
     } catch (error) {
       console.log(error);
