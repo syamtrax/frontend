@@ -12,11 +12,14 @@ const Navbar = () => {
   const navigate = useNavigate();
   const Logout = async () => {
     try {
-      await axios.delete("https://sembapp.azurewebsites.net/logout", {
-        headers: {
-          authorization: `Bearer ${cookies.accessToken}`,
-        },
-      });
+      await axios.delete(
+        "http://ec2-35-153-232-122.compute-1.amazonaws.com:5000/logout",
+        {
+          headers: {
+            authorization: `Bearer ${cookies.accessToken}`,
+          },
+        }
+      );
       removeCookie("accessToken", { path: "/" });
       navigate("/");
     } catch (error) {
