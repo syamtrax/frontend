@@ -13,7 +13,7 @@ const Navbar = () => {
   const Logout = async () => {
     try {
       await axios.delete(
-        "ec2-user@ec2-34-194-13-113.compute-1.amazonaws.com/logout",
+        "http://ec2-34-194-13-113.compute-1.amazonaws.com:5000/logout",
         {
           headers: {
             authorization: `Bearer ${cookies.accessToken}`,
